@@ -486,7 +486,9 @@
         import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
         import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 
-        // Firebase configuration - Replace with your actual config
+        // Firebase configuration - IMPORTANT: Replace with your actual Firebase project config
+        // These are placeholder values for demonstration purposes only
+        // Get your config from: Firebase Console > Project Settings > General > Your apps
         const firebaseConfig = {
             apiKey: "AIzaSyDemoKey123456789",
             authDomain: "wa-ai-core.firebaseapp.com",
@@ -504,8 +506,15 @@
         // Particle Animation
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        
+        // Wait for DOM to be ready and set canvas dimensions
+        function initCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+        
+        initCanvas();
+        window.addEventListener('resize', initCanvas);
 
         const particles = [];
         const particleCount = 50;
@@ -523,8 +532,22 @@
                 this.x += this.vx;
                 this.y += this.vy;
 
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                // Clamp position to canvas bounds and reverse velocity
+                if (this.x < 0) {
+                    this.x = 0;
+                    this.vx *= -1;
+                } else if (this.x > canvas.width) {
+                    this.x = canvas.width;
+                    this.vx *= -1;
+                }
+                
+                if (this.y < 0) {
+                    this.y = 0;
+                    this.vy *= -1;
+                } else if (this.y > canvas.height) {
+                    this.y = canvas.height;
+                    this.vy *= -1;
+                }
             }
 
             draw() {
