@@ -647,6 +647,18 @@
             });
         });
 
+        // Store current user ID for multi-tenant path structure
+        let currentUserId = null;
+
+        // Helper function to build collection path
+        // Path structure: artifacts/rozmowa-ai-core/users/{userId}/{collectionName}
+        function getCollectionPath(collectionName) {
+            if (!currentUserId) {
+                throw new Error('User not authenticated');
+            }
+            return `artifacts/rozmowa-ai-core/users/${currentUserId}/${collectionName}`;
+        }
+
         // Anonymous Authentication
         signInAnonymously(auth).then(() => {
             console.log('Signed in anonymously');
@@ -656,6 +668,7 @@
 
         onAuthStateChanged(auth, user => {
             if (user) {
+                currentUserId = user.uid;
                 console.log('User authenticated:', user.uid);
                 initializeDataListeners();
             }
@@ -664,7 +677,7 @@
         // Data Management Functions
         function initializeDataListeners() {
             // Students listener
-            onSnapshot(collection(db, 'students'), snapshot => {
+            onSnapshot(collection(db, getCollectionPath('students')), snapshot => {
                 const tbody = document.getElementById('studentsTableBody');
                 tbody.innerHTML = '';
                 document.getElementById('studentCount').textContent = snapshot.size;
@@ -685,7 +698,7 @@
             });
 
             // Lessons listener
-            onSnapshot(collection(db, 'lessons'), snapshot => {
+            onSnapshot(collection(db, getCollectionPath('lessons')), snapshot => {
                 const tbody = document.getElementById('lessonsTableBody');
                 tbody.innerHTML = '';
                 document.getElementById('lessonCount').textContent = snapshot.size;
@@ -706,7 +719,7 @@
             });
 
             // Materials listener
-            onSnapshot(collection(db, 'materials'), snapshot => {
+            onSnapshot(collection(db, getCollectionPath('materials')), snapshot => {
                 const tbody = document.getElementById('materialsTableBody');
                 tbody.innerHTML = '';
                 document.getElementById('materialCount').textContent = snapshot.size;
@@ -727,7 +740,7 @@
             });
 
             // Exams listener
-            onSnapshot(collection(db, 'exams'), snapshot => {
+            onSnapshot(collection(db, getCollectionPath('exams')), snapshot => {
                 const tbody = document.getElementById('examsTableBody');
                 tbody.innerHTML = '';
                 document.getElementById('examCount').textContent = snapshot.size;
@@ -755,7 +768,7 @@
             const data = Object.fromEntries(formData);
             
             try {
-                await addDoc(collection(db, 'students'), data);
+                await addDoc(collection(db, getCollectionPath('students')), data);
                 e.target.reset();
                 console.log('Student added successfully');
             } catch (error) {
@@ -769,7 +782,7 @@
             const data = Object.fromEntries(formData);
             
             try {
-                await addDoc(collection(db, 'lessons'), data);
+                await addDoc(collection(db, getCollectionPath('lessons')), data);
                 e.target.reset();
                 console.log('Lesson added successfully');
             } catch (error) {
@@ -783,7 +796,7 @@
             const data = Object.fromEntries(formData);
             
             try {
-                await addDoc(collection(db, 'materials'), data);
+                await addDoc(collection(db, getCollectionPath('materials')), data);
                 e.target.reset();
                 console.log('Material added successfully');
             } catch (error) {
@@ -797,7 +810,7 @@
             const data = Object.fromEntries(formData);
             
             try {
-                await addDoc(collection(db, 'exams'), data);
+                await addDoc(collection(db, getCollectionPath('exams')), data);
                 e.target.reset();
                 console.log('Exam added successfully');
             } catch (error) {
@@ -808,7 +821,7 @@
         // Delete Functions
         window.deleteStudent = async (id) => {
             try {
-                await deleteDoc(doc(db, 'students', id));
+                await deleteDoc(doc(db, getCollectionPath('students'), id));
                 console.log('Student deleted successfully');
             } catch (error) {
                 console.error('Error deleting student:', error);
@@ -817,7 +830,7 @@
 
         window.deleteLesson = async (id) => {
             try {
-                await deleteDoc(doc(db, 'lessons', id));
+                await deleteDoc(doc(db, getCollectionPath('lessons'), id));
                 console.log('Lesson deleted successfully');
             } catch (error) {
                 console.error('Error deleting lesson:', error);
@@ -826,7 +839,7 @@
 
         window.deleteMaterial = async (id) => {
             try {
-                await deleteDoc(doc(db, 'materials', id));
+                await deleteDoc(doc(db, getCollectionPath('materials'), id));
                 console.log('Material deleted successfully');
             } catch (error) {
                 console.error('Error deleting material:', error);
@@ -835,7 +848,7 @@
 
         window.deleteExam = async (id) => {
             try {
-                await deleteDoc(doc(db, 'exams', id));
+                await deleteDoc(doc(db, getCollectionPath('exams'), id));
                 console.log('Exam deleted successfully');
             } catch (error) {
                 console.error('Error deleting exam:', error);
