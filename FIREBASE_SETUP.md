@@ -96,10 +96,14 @@ npm install -g firebase-tools
 # Login to Firebase
 firebase login
 
-# Initialize Firestore (first time only)
-firebase init firestore
-# Select your project when prompted
-# Accept the default firestore.rules file
+# Set up Firebase project (first time only)
+# Copy the .firebaserc template and update with your project ID
+cp .firebaserc.template .firebaserc
+# Edit .firebaserc and replace "your-project-id" with your actual Firebase project ID
+
+# The repository already includes:
+# - firebase.json (Firebase CLI configuration)
+# - firestore.rules (Security rules for multi-tenant data isolation)
 
 # Deploy the security rules
 firebase deploy --only firestore:rules
@@ -165,9 +169,13 @@ firebase deploy --only firestore:rules
 wa-ai-core/
 ├── firebase-config.js          # Your Firebase configuration (edit this)
 ├── firebase-config.template.js # Template showing required structure
+├── firebase.json               # Firebase CLI configuration
 ├── firestore.rules             # Security rules (deploy to Firebase)
+├── .firebaserc                 # Firebase project ID (create from .firebaserc.template)
+├── .firebaserc.template        # Template for Firebase project configuration
 ├── index.html                  # Main application
-└── FIREBASE_SETUP.md          # This guide
+├── FIREBASE_SETUP.md          # This guide
+└── README.md                  # Project overview
 ```
 
 ## Additional Resources
