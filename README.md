@@ -28,30 +28,55 @@ Project Cortex: A bespoke, AI-powered dashboard for the Rozmowa English School. 
 
 To use this application with your own Firebase project:
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project or select an existing one
-3. Enable **Anonymous Authentication**:
+1. **Create a Firebase Project**:
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create a new project or select an existing one
+
+2. **Enable Anonymous Authentication**:
    - Go to Authentication > Sign-in method
    - Enable Anonymous provider
-4. Create a **Firestore Database**:
+
+3. **Create a Firestore Database**:
    - Go to Firestore Database
    - Create database in test mode (or production mode with appropriate rules)
-5. Get your Firebase configuration:
+
+4. **Get Your Firebase Configuration**:
    - Go to Project Settings > General
-   - Scroll down to "Your apps" and select Web app
+   - Scroll down to "Your apps" section
+   - If you haven't created a web app yet, click "Add app" and select Web (</>) 
    - Copy the Firebase configuration object
-6. Update the `firebaseConfig` object in `index.html` (around line 488) with your actual configuration:
+
+5. **Update Your Local Configuration**:
+   - Open `firebase-config.js` in your project directory
+   - Replace the placeholder values with your actual Firebase configuration:
 
 ```javascript
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+export const firebaseConfig = {
+    apiKey: "your-actual-api-key",
+    authDomain: "your-project.firebaseapp.com",
+    projectId: "your-project-id",
+    storageBucket: "your-project.appspot.com",
+    messagingSenderId: "your-sender-id",
+    appId: "your-app-id"
 };
 ```
+
+6. **Deploy Firestore Security Rules** (Important for security):
+   ```bash
+   # Install Firebase CLI (if not already installed)
+   npm install -g firebase-tools
+   
+   # Login to Firebase
+   firebase login
+   
+   # Initialize Firestore (if first time)
+   firebase init firestore
+   
+   # Deploy the security rules
+   firebase deploy --only firestore:rules
+   ```
+
+**Note**: The `firebase-config.js` file contains your project's configuration. While the repository includes a default template with placeholder values, you should update it with your actual Firebase credentials. The placeholder configuration will display a warning message until you configure it properly.
 
 ## Usage
 
