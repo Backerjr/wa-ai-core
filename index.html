@@ -926,13 +926,18 @@
         });
 
         // Delete Functions
+        // Helper function for delete confirmation
+        function confirmDelete(itemType) {
+            return window.confirm(`Are you sure you want to delete this ${itemType}?`);
+        }
+
         window.deleteStudent = async (id) => {
             if (!currentUserId) {
                 console.error('Please wait for authentication to complete');
                 return;
             }
             
-            if (!window.confirm('Are you sure you want to delete this student?')) {
+            if (!confirmDelete('student')) {
                 return;
             }
             
@@ -950,7 +955,7 @@
                 return;
             }
             
-            if (!window.confirm('Are you sure you want to delete this lesson?')) {
+            if (!confirmDelete('lesson')) {
                 return;
             }
             
@@ -968,7 +973,7 @@
                 return;
             }
             
-            if (!window.confirm('Are you sure you want to delete this material?')) {
+            if (!confirmDelete('material')) {
                 return;
             }
             
@@ -986,7 +991,7 @@
                 return;
             }
             
-            if (!window.confirm('Are you sure you want to delete this exam?')) {
+            if (!confirmDelete('exam')) {
                 return;
             }
             
