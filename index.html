@@ -199,6 +199,19 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
                 </svg>
             </div>
+            
+            <!-- Auth Status Display -->
+            <div class="mt-auto mb-4 px-2">
+                <div class="glass rounded-xl p-3 text-center">
+                    <div id="authStatus" class="text-xs font-semibold mb-2" style="color: #10b981;">
+                        <div class="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1"></div>
+                        AUTH
+                    </div>
+                    <div id="userIdDisplay" class="text-xs text-slate-400 break-all" title="User ID">
+                        ...
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Main Content -->
@@ -484,7 +497,10 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
         import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
-        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, setLogLevel } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+
+        // Enable Firestore debug logging
+        setLogLevel('debug');
 
         // Firebase configuration - IMPORTANT: Replace with your actual Firebase project config
         // These are placeholder values for demonstration purposes only
@@ -497,6 +513,34 @@
             messagingSenderId: "123456789",
             appId: "1:123456789:web:abcdef123456"
         };
+
+        // Check if Firebase config is still using placeholder values
+        if (firebaseConfig.apiKey === "AIzaSyDemoKey123456789") {
+            // Create and show prominent config error message
+            const errorDiv = document.createElement('div');
+            errorDiv.id = 'config-error';
+            errorDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 0.5rem;
+                box-shadow: 0 10px 40px rgba(239, 68, 68, 0.5);
+                z-index: 9999;
+                font-weight: 600;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                max-width: 90%;
+                text-align: center;
+            `;
+            errorDiv.innerHTML = `
+                ⚠️ FIREBASE CONFIG ERROR: Please replace the placeholder apiKey with your actual Firebase configuration!<br>
+                <small style="font-weight: 400; opacity: 0.9;">Get your config from: Firebase Console > Project Settings > General > Your apps</small>
+            `;
+            document.body.appendChild(errorDiv);
+        }
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -670,7 +714,34 @@
             if (user) {
                 currentUserId = user.uid;
                 console.log('User authenticated:', user.uid);
+                
+                // Update auth status display in sidebar
+                const authStatus = document.getElementById('authStatus');
+                const userIdDisplay = document.getElementById('userIdDisplay');
+                
+                if (authStatus && userIdDisplay) {
+                    authStatus.innerHTML = `
+                        <div class="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                        ONLINE
+                    `;
+                    // Show short version of userId (first 8 characters)
+                    userIdDisplay.textContent = user.uid.substring(0, 8) + '...';
+                    userIdDisplay.title = user.uid; // Full ID in tooltip
+                }
+                
                 initializeDataListeners();
+            } else {
+                // Update auth status to show offline
+                const authStatus = document.getElementById('authStatus');
+                const userIdDisplay = document.getElementById('userIdDisplay');
+                
+                if (authStatus && userIdDisplay) {
+                    authStatus.innerHTML = `
+                        <div class="w-2 h-2 bg-red-400 rounded-full mx-auto mb-1"></div>
+                        OFFLINE
+                    `;
+                    userIdDisplay.textContent = 'N/A';
+                }
             }
         });
 
@@ -773,6 +844,9 @@
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
+            // Add serverTimestamp for created field
+            data.created = serverTimestamp();
+            
             try {
                 await addDoc(collection(db, getCollectionPath('students')), data);
                 e.target.reset();
@@ -792,6 +866,9 @@
             
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
+            
+            // Add serverTimestamp for created field
+            data.created = serverTimestamp();
             
             try {
                 await addDoc(collection(db, getCollectionPath('lessons')), data);
@@ -813,6 +890,9 @@
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
+            // Add serverTimestamp for created field
+            data.created = serverTimestamp();
+            
             try {
                 await addDoc(collection(db, getCollectionPath('materials')), data);
                 e.target.reset();
@@ -833,6 +913,9 @@
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
+            // Add serverTimestamp for created field
+            data.created = serverTimestamp();
+            
             try {
                 await addDoc(collection(db, getCollectionPath('exams')), data);
                 e.target.reset();
@@ -846,6 +929,10 @@
         window.deleteStudent = async (id) => {
             if (!currentUserId) {
                 console.error('Please wait for authentication to complete');
+                return;
+            }
+            
+            if (!window.confirm('Are you sure you want to delete this student?')) {
                 return;
             }
             
@@ -863,6 +950,10 @@
                 return;
             }
             
+            if (!window.confirm('Are you sure you want to delete this lesson?')) {
+                return;
+            }
+            
             try {
                 await deleteDoc(doc(db, getCollectionPath('lessons'), id));
                 console.log('Lesson deleted successfully');
@@ -877,6 +968,10 @@
                 return;
             }
             
+            if (!window.confirm('Are you sure you want to delete this material?')) {
+                return;
+            }
+            
             try {
                 await deleteDoc(doc(db, getCollectionPath('materials'), id));
                 console.log('Material deleted successfully');
@@ -888,6 +983,10 @@
         window.deleteExam = async (id) => {
             if (!currentUserId) {
                 console.error('Please wait for authentication to complete');
+                return;
+            }
+            
+            if (!window.confirm('Are you sure you want to delete this exam?')) {
                 return;
             }
             
