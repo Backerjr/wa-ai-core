@@ -764,6 +764,12 @@
         // Form Handlers
         document.getElementById('studentForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
@@ -778,6 +784,12 @@
 
         document.getElementById('lessonForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
@@ -792,6 +804,12 @@
 
         document.getElementById('materialForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
@@ -806,6 +824,12 @@
 
         document.getElementById('examForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
@@ -820,6 +844,11 @@
 
         // Delete Functions
         window.deleteStudent = async (id) => {
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             try {
                 await deleteDoc(doc(db, getCollectionPath('students'), id));
                 console.log('Student deleted successfully');
@@ -829,6 +858,11 @@
         };
 
         window.deleteLesson = async (id) => {
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             try {
                 await deleteDoc(doc(db, getCollectionPath('lessons'), id));
                 console.log('Lesson deleted successfully');
@@ -838,6 +872,11 @@
         };
 
         window.deleteMaterial = async (id) => {
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             try {
                 await deleteDoc(doc(db, getCollectionPath('materials'), id));
                 console.log('Material deleted successfully');
@@ -847,6 +886,11 @@
         };
 
         window.deleteExam = async (id) => {
+            if (!currentUserId) {
+                console.error('Please wait for authentication to complete');
+                return;
+            }
+            
             try {
                 await deleteDoc(doc(db, getCollectionPath('exams'), id));
                 console.log('Exam deleted successfully');
