@@ -65,6 +65,43 @@ const firebaseConfig = {
    - **Exams**: Add, view, and delete exams
 4. All data is automatically synced with Firebase Firestore in real-time
 
+## Firestore Database Structure
+
+This application uses a **multi-tenant architecture** with user-isolated data paths for security and scalability.
+
+### Path Structure
+
+All user data is stored under the following path pattern:
+
+```
+artifacts/rozmowa-ai-core/users/{userId}/{collectionName}
+```
+
+**Breaking it down:**
+- `artifacts/` - Top-level collection for all apps
+- `rozmowa-ai-core/` - Document representing this specific app
+- `users/` - Collection holding all users
+- `{userId}/` - Document for each individual user (using Firebase Auth UID)
+- `{collectionName}/` - Sub-collections: `students`, `lessons`, `materials`, `exams`
+
+### Why This Structure?
+
+1. **Security**: Each user's data is isolated under their unique `{userId}`, making it easy to write security rules that prevent users from accessing each other's data.
+2. **Scalability**: Supports unlimited users without data conflicts.
+3. **Multi-tenant**: Multiple users can use the app simultaneously with complete data isolation.
+
+### Security Rules
+
+The application includes Firestore security rules (see `firestore.rules`) that enforce:
+- Users can only read/write data in their own path (where `{userId}` matches their authenticated UID)
+- All other access is denied by default
+
+To deploy these rules to your Firebase project:
+1. Install Firebase CLI: `npm install -g firebase-tools`
+2. Login: `firebase login`
+3. Initialize: `firebase init firestore` (select your project)
+4. Deploy: `firebase deploy --only firestore:rules`
+
 ## Collections Structure
 
 ### Students Collection
