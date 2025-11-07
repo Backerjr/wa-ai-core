@@ -1,19 +1,8 @@
-// Firebase Configuration
-// IMPORTANT: Replace these placeholder values with your actual Firebase configuration
-// Get your config from: Firebase Console > Project Settings > General > Your apps
-// 
-// Instructions:
-// 1. Go to https://console.firebase.google.com/
-// 2. Select your project (or create a new one)
-// 3. Go to Project Settings > General > Your apps
-// 4. Copy your Firebase configuration
-// 5. Replace the values below with your actual configuration
-
-export const firebaseConfig = {
-    apiKey: "AIzaSyDemoKey123456789",
-    authDomain: "wa-ai-core.firebaseapp.com",
-    projectId: "wa-ai-core",
-    storageBucket: "wa-ai-core.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdef123456"
+const firebaseConfig = {
+  apiKey: "AIzaSyB8mZzYCujtcG5RylvCx18e6BRVp26kcFY",
+  authDomain: "studio-617595928-cae03.firebaseapp.com",
+  projectId: "studio-617595928-cae03",
+  storageBucket: "studio-617595928-cae03.firebasestorage.app",
+  messagingSenderId: "201908464871",
+  appId: "1:201908464871:web:e815d2a1cc1284225e4642"
 };
