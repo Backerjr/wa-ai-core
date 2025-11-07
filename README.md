@@ -26,32 +26,19 @@ Project Cortex: A bespoke, AI-powered dashboard for the Rozmowa English School. 
 
 ## Firebase Setup
 
-To use this application with your own Firebase project:
+**Quick Start**: Edit `firebase-config.js` with your Firebase credentials.
 
+For detailed setup instructions, see [FIREBASE_SETUP.md](FIREBASE_SETUP.md).
+
+**Summary**:
 1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project or select an existing one
-3. Enable **Anonymous Authentication**:
-   - Go to Authentication > Sign-in method
-   - Enable Anonymous provider
-4. Create a **Firestore Database**:
-   - Go to Firestore Database
-   - Create database in test mode (or production mode with appropriate rules)
-5. Get your Firebase configuration:
-   - Go to Project Settings > General
-   - Scroll down to "Your apps" and select Web app
-   - Copy the Firebase configuration object
-6. Update the `firebaseConfig` object in `index.html` (around line 488) with your actual configuration:
+2. Create a project and enable Anonymous Authentication
+3. Create a Firestore Database
+4. Get your web app configuration
+5. Update `firebase-config.js` with your actual credentials
+6. Deploy security rules: `firebase deploy --only firestore:rules`
 
-```javascript
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-```
+**Note**: The application will display an error banner until you configure your actual Firebase credentials.
 
 ## Usage
 
