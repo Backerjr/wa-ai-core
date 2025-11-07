@@ -4,3 +4,6 @@ demo.html
 
 # Firebase CLI configuration (user-specific)
 .firebaserc
+
+# Node modules
+node_modules/
