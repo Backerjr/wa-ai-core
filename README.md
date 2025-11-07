@@ -20,9 +20,32 @@ Project Cortex: A bespoke, AI-powered dashboard for the Rozmowa English School. 
 ## Technology Stack
 
 - **HTML5**: Single-page application
-- **Tailwind CSS**: Via CDN for styling
+- **Tailwind CSS v3**: Optimized build process with PostCSS
 - **Firebase 11**: Authentication and Firestore database via CDN
 - **Vanilla JavaScript**: ES6 modules for Firebase integration
+
+## Development Setup
+
+### Prerequisites
+- Node.js (for Tailwind CSS build process)
+
+### Installation
+```bash
+npm install
+```
+
+### Building CSS
+The project uses Tailwind CSS with a build process to generate optimized CSS:
+
+```bash
+# Build optimized CSS (production)
+npm run build:css
+
+# Watch mode for development
+npm run watch:css
+```
+
+The generated CSS file is committed to the repository at `dist/output.css`, so end users can open `index.html` directly without needing to build.
 
 ## Firebase Setup
 
