@@ -4,7 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rozmowa AI Core</title>
-    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="./dist/output.css" id="tailwindStylesheet">
+    <script>
+        (function() {
+            const tailwindLink = document.getElementById('tailwindStylesheet');
+            if (!tailwindLink) return;
+
+            let fallbackLoaded = false;
+
+            const showFallbackBanner = () => {
+                const insertBanner = () => {
+                    if (document.getElementById('css-fallback-warning')) {
+                        return;
+                    }
+                    const warningDiv = document.createElement('div');
+                    warningDiv.id = 'css-fallback-warning';
+                    warningDiv.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+                        color: white;
+                        padding: 0.75rem 1.5rem;
+                        border-radius: 0 0 0.75rem 0.75rem;
+                        box-shadow: 0 20px 40px rgba(249, 115, 22, 0.4);
+                        z-index: 9999;
+                        font-weight: 600;
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        text-align: center;
+                        max-width: 90%;
+                    `;
+                    warningDiv.innerHTML = `
+                        ⚠️ Local styles unavailable. Loaded Tailwind from CDN instead.<br>
+                        <small style="font-weight: 400; opacity: 0.9;">Run <code>npm run build:css</code> and deploy <code>dist/output.css</code> to remove this warning.</small>
+                    `;
+                    document.body.appendChild(warningDiv);
+                };
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', insertBanner, { once: true });
+                } else {
+                    insertBanner();
+                }
+            };
+
+            const loadFallbackCss = () => {
+                if (fallbackLoaded) return;
+                fallbackLoaded = true;
+
+                const fallbackLink = document.createElement('link');
+                fallbackLink.id = 'tailwindFallbackStylesheet';
+                fallbackLink.rel = 'stylesheet';
+                fallbackLink.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@3.4.18/dist/tailwind.min.css';
+                fallbackLink.crossOrigin = 'anonymous';
+                fallbackLink.referrerPolicy = 'no-referrer';
+                fallbackLink.addEventListener('load', () => {
+                    console.info('Tailwind CSS fallback loaded from CDN.');
+                });
+                fallbackLink.addEventListener('error', () => {
+                    console.error('Tailwind CSS fallback failed to load from CDN.');
+                });
+
+                document.head.appendChild(fallbackLink);
+                showFallbackBanner();
+            };
+
+            tailwindLink.addEventListener('error', loadFallbackCss);
+
+            window.addEventListener('load', () => {
+                try {
+                    const sheetLoaded = Array.from(document.styleSheets).some(
+                        (sheet) => sheet.ownerNode === tailwindLink && sheet.cssRules.length > 0
+                    );
+                    if (!sheetLoaded) {
+                        loadFallbackCss();
+                    }
+                } catch (error) {
+                    // Accessing cssRules can throw if the stylesheet failed to load.
+                    loadFallbackCss();
+                }
+            });
+        })();
+    </script>
     <style>
         body {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
