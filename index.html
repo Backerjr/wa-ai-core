@@ -766,6 +766,85 @@
         // Store current user ID for multi-tenant path structure
         let currentUserId = null;
 
+        const authStatusElement = document.getElementById('authStatus');
+        const userIdDisplayElement = document.getElementById('userIdDisplay');
+        const submitButtons = document.querySelectorAll('form button[type="submit"]');
+
+        function setFormsEnabled(enabled) {
+            submitButtons.forEach(button => {
+                button.disabled = !enabled;
+                button.style.opacity = enabled ? '' : '0.6';
+                button.style.cursor = enabled ? 'pointer' : 'not-allowed';
+            });
+        }
+
+        function updateAuthStatus(state, userIdText = 'N/A') {
+            if (!authStatusElement || !userIdDisplayElement) {
+                return;
+            }
+            const stateMap = {
+                pending: { label: 'CONNECTING', color: 'bg-yellow-400', pulse: true },
+                online: { label: 'ONLINE', color: 'bg-green-400', pulse: true },
+                offline: { label: 'OFFLINE', color: 'bg-red-400', pulse: false },
+                error: { label: 'CHECK CONFIG', color: 'bg-orange-400', pulse: false }
+            };
+            const { label, color, pulse } = stateMap[state] || stateMap.offline;
+            authStatusElement.innerHTML = `
+                <div class="w-2 h-2 ${color} rounded-full mx-auto mb-1 ${pulse ? 'animate-pulse' : ''}"></div>
+                ${label}
+            `;
+            userIdDisplayElement.textContent = userIdText;
+            userIdDisplayElement.title = userIdText;
+        }
+
+        function showAuthErrorBanner(message, helpText) {
+            const existing = document.getElementById('auth-error-banner');
+            if (existing) {
+                existing.remove();
+            }
+            const banner = document.createElement('div');
+            banner.id = 'auth-error-banner';
+            banner.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 0.75rem;
+                box-shadow: 0 15px 40px rgba(239, 68, 68, 0.4);
+                z-index: 9999;
+                font-weight: 600;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                text-align: center;
+                max-width: 90%;
+            `;
+            banner.innerHTML = `
+                ⚠️ Firebase authentication failed (${message}).<br>
+                <small style="font-weight: 400; opacity: 0.9;">${helpText}</small>
+            `;
+            document.body.appendChild(banner);
+        }
+
+        function hideAuthErrorBanner() {
+            const existing = document.getElementById('auth-error-banner');
+            if (existing) {
+                existing.remove();
+            }
+        }
+
+        function getAuthErrorHelp(error) {
+            switch (error?.code) {
+                case 'auth/admin-restricted-operation':
+                    return 'Enable Anonymous Authentication in Firebase Console > Authentication > Sign-in method.';
+                case 'auth/network-request-failed':
+                    return 'Network request failed. Check your connection or Firebase allowlist.';
+                default:
+                    return 'Verify firebase-config.js and ensure Anonymous Authentication is enabled.';
+            }
+        }
+
         // Helper function to build collection path
         // Path structure: artifacts/rozmowa-ai-core/users/{userId}/{collectionName}
         function getCollectionPath(collectionName) {
@@ -775,12 +854,21 @@
             return `artifacts/rozmowa-ai-core/users/${currentUserId}/${collectionName}`;
         }
 
-        // Anonymous Authentication
-        signInAnonymously(auth).then(() => {
-            console.log('Signed in anonymously');
-        }).catch(error => {
-            console.error('Auth error:', error);
-        });
+        async function authenticate() {
+            try {
+                await signInAnonymously(auth);
+                console.log('Signed in anonymously');
+            } catch (error) {
+                console.error('Auth error:', error);
+                updateAuthStatus('error', 'AUTH_ERR');
+                setFormsEnabled(false);
+                showAuthErrorBanner(error.code || 'unknown-error', getAuthErrorHelp(error));
+            }
+        }
+
+        setFormsEnabled(false);
+        updateAuthStatus('pending', '...');
+        authenticate();
 
         onAuthStateChanged(auth, user => {
             if (user) {
@@ -788,32 +876,18 @@
                 console.log('User authenticated:', user.uid);
                 
                 // Update auth status display in sidebar
-                const authStatus = document.getElementById('authStatus');
-                const userIdDisplay = document.getElementById('userIdDisplay');
-                
-                if (authStatus && userIdDisplay) {
-                    authStatus.innerHTML = `
-                        <div class="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1 animate-pulse"></div>
-                        ONLINE
-                    `;
-                    // Show short version of userId (first 8 characters)
-                    userIdDisplay.textContent = user.uid.substring(0, 8) + '...';
-                    userIdDisplay.title = user.uid; // Full ID in tooltip
+                hideAuthErrorBanner();
+                setFormsEnabled(true);
+                updateAuthStatus('online', `${user.uid.substring(0, 8)}...`);
+                if (userIdDisplayElement) {
+                    userIdDisplayElement.title = user.uid;
                 }
-                
+            
                 initializeDataListeners();
             } else {
-                // Update auth status to show offline
-                const authStatus = document.getElementById('authStatus');
-                const userIdDisplay = document.getElementById('userIdDisplay');
-                
-                if (authStatus && userIdDisplay) {
-                    authStatus.innerHTML = `
-                        <div class="w-2 h-2 bg-red-400 rounded-full mx-auto mb-1"></div>
-                        OFFLINE
-                    `;
-                    userIdDisplay.textContent = 'N/A';
-                }
+                currentUserId = null;
+                setFormsEnabled(false);
+                updateAuthStatus('offline', 'N/A');
             }
         });
 
