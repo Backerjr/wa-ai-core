@@ -20,38 +20,51 @@ Project Cortex: A bespoke, AI-powered dashboard for the Rozmowa English School. 
 ## Technology Stack
 
 - **HTML5**: Single-page application
-- **Tailwind CSS**: Via CDN for styling
+- **Tailwind CSS v3**: Optimized build process with PostCSS
 - **Firebase 11**: Authentication and Firestore database via CDN
 - **Vanilla JavaScript**: ES6 modules for Firebase integration
 
+## Development Setup
+
+### Prerequisites
+- Node.js (for Tailwind CSS build process)
+
+### Installation
+```bash
+npm install
+```
+
+### Building CSS
+The project uses Tailwind CSS with a build process to generate optimized CSS:
+
+```bash
+# Build optimized CSS (production)
+npm run build:css
+
+# Watch mode for development
+npm run watch:css
+```
+
+The generated CSS file is committed to the repository at `dist/output.css`, so end users can open `index.html` directly without needing to build.
+
 ## Firebase Setup
 
-To use this application with your own Firebase project:
+**Quick Start**:
+1. Copy the template: `cp firebase-config.template.js firebase-config.js`
+2. Paste your Firebase credentials into the new `firebase-config.js` (this file stays local and is git-ignored)
+3. Run `./scripts/diagnostics.sh` to install dependencies, build CSS, and validate your configuration
 
+For detailed setup instructions, see [FIREBASE_SETUP.md](FIREBASE_SETUP.md).
+
+**Summary**:
 1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project or select an existing one
-3. Enable **Anonymous Authentication**:
-   - Go to Authentication > Sign-in method
-   - Enable Anonymous provider
-4. Create a **Firestore Database**:
-   - Go to Firestore Database
-   - Create database in test mode (or production mode with appropriate rules)
-5. Get your Firebase configuration:
-   - Go to Project Settings > General
-   - Scroll down to "Your apps" and select Web app
-   - Copy the Firebase configuration object
-6. Update the `firebaseConfig` object in `index.html` (around line 488) with your actual configuration:
+2. Create a project and enable Anonymous Authentication
+3. Create a Firestore Database
+4. Get your web app configuration
+5. Update `firebase-config.js` with your actual credentials
+6. Deploy security rules: `firebase deploy --only firestore:rules`
 
-```javascript
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-```
+**Note**: The application will display an error banner until you configure your actual Firebase credentials.
 
 ## Usage
 
@@ -134,6 +147,21 @@ To deploy these rules to your Firebase project:
 ## Development
 
 No build process required! Just open `index.html` in a browser after configuring Firebase.
+
+## Diagnostics & Status Checks
+
+Run the helper script to validate your environment and catch common misconfigurations:
+
+```bash
+./scripts/diagnostics.sh
+```
+
+It will:
+- Install dependencies if `node_modules` is missing
+- Build `dist/output.css`
+- Warn if `firebase-config.js` still uses placeholder or shared credentials
+- Copy `.firebaserc.template` to `.firebaserc` (if missing) so you can set your project ID
+- Confirm `firestore.rules` exists before you deploy
 
 ## License
 

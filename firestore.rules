@@ -2,11 +2,11 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Multi-tenant security rules for artifacts/rozmowa-ai-core/users/{userId}
-    // Each user can only access their own data
-    
+    // Multi-tenant architecture with user-isolated data paths
+    // Path: artifacts/rozmowa-ai-core/users/{userId}/{collectionName}
     match /artifacts/rozmowa-ai-core/users/{userId}/{document=**} {
-      // Allow read and write only if the authenticated user's ID matches the userId in the path
+      // Users can only read and write their own data
+      // Must be authenticated and the userId must match their auth UID
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
     
@@ -16,3 +16,4 @@ service cloud.firestore {
     }
   }
 }
+
