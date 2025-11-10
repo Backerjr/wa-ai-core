@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "your-project-id"
+    "default": "studio-617595928-cae03"
   },
   "emulators": {
     "auth": {
@@ -9,6 +9,5 @@
     "firestore": {
       "port": 8080
     }
-    "default": "studio-617595928-cae03"
   }
 }
