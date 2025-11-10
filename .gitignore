@@ -1,6 +1,10 @@
 demo.html
-# Keep firebase-config.js tracked for default configuration
-# Users can modify it locally with their own Firebase credentials
+
+# CRITICAL: Don't commit real Firebase config
+firebase-config.js
+
+# Keep template
+!firebase-config.template.js
 
 # Firebase CLI configuration (user-specific)
 .firebaserc
