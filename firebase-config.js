@@ -1,7 +1,5 @@
-// Firebase Configuration Template
-// Copy this file to 'firebase-config.js' and replace the placeholder values with your actual Firebase configuration
-// Get your config from: Firebase Console > Project Settings > General > Your apps
-
+// Firebase configuration for the WA AI Core project.
+// Get your config from: Firebase Console > Project Settings > General > Your apps.
 export const firebaseConfig = {
   apiKey: "AIzaSyB8mZzYCujtcG5RylvCx18e6BRVp26kcFY",
   authDomain: "studio-617595928-cae03.firebaseapp.com",
@@ -10,5 +8,3 @@ export const firebaseConfig = {
   messagingSenderId: "201908464871",
   appId: "1:201908464871:web:e815d2a1cc1284225e4642"
 };
-
-
