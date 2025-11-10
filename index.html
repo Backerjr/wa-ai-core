@@ -582,13 +582,14 @@
         import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, setLogLevel } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 
         const firebaseConfig = {
-            apiKey: "AIzaSyB8mZzYCujtcG5RylvCx18e6BRVp26kcFY",
-            authDomain: "studio-617595928-cae03.firebaseapp.com",
-            projectId: "studio-617595928-cae03",
-            storageBucket: "studio-617595928-cae03.firebasestorage.app",
-            messagingSenderId: "201908464871",
-            appId: "1:201908464871:web:e815d2a1cc1284225e4642"
-        };
+    apiKey: "AIzaSyB8mZzYCujtcG5RylvCx18e6BRVp26kcFY",
+    authDomain: "studio-617595928-cae03.firebaseapp.com",
+    projectId: "studio-617595928-cae03", // <-- This is your actual Project ID
+    storageBucket: "studio-617595928-cae03.firebasestorage.app",
+    messagingSenderId: "201908464871", // <-- This is NOT the Project ID
+    appId: "1:201908464871:web:e815d2a1cc1284225e4642"
+};
+
 
         // Enable Firestore debug logging
         setLogLevel('debug');
