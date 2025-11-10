@@ -8,6 +8,7 @@
 // Firebase Console > Project Settings > General > Your apps (https://console.firebase.google.com/)
 
 export const firebaseConfig = {
+<<<<<<< HEAD
   export const firebaseConfig = {
     apiKey: "your-actual-api-key",              // Replace this
     authDomain: "your-project.firebaseapp.com", // Replace this
@@ -15,6 +16,14 @@ export const firebaseConfig = {
     storageBucket: "your-project.appspot.com",   // Replace this
     messagingSenderId: "your-sender-id",         // Replace this
     appId: "your-app-id"                         // Replace this
+=======
+  apiKey: "REPLACE_WITH_YOUR_API_KEY",
+  authDomain: "REPLACE_WITH_YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
+  storageBucket: "REPLACE_WITH_YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "REPLACE_WITH_YOUR_MESSAGING_SENDER_ID",
+  appId: "studio-617595928-cae03"
+>>>>>>> 6af7142 (save and close this editor to proceed with the commit. --- IGNORE ---)
 };
 
 /**
