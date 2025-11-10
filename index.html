@@ -580,7 +580,15 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
         import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
         import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, setLogLevel } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
-        import { firebaseConfig } from './firebase-config.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB8mZzYCujtcG5RylvCx18e6BRVp26kcFY",
+            authDomain: "studio-617595928-cae03.firebaseapp.com",
+            projectId: "studio-617595928-cae03",
+            storageBucket: "studio-617595928-cae03.firebasestorage.app",
+            messagingSenderId: "201908464871",
+            appId: "1:201908464871:web:e815d2a1cc1284225e4642"
+        };
 
         // Enable Firestore debug logging
         setLogLevel('debug');
@@ -608,7 +616,7 @@
             `;
             errorDiv.innerHTML = `
                 ⚠️ FIREBASE CONFIG ERROR: Please configure your Firebase credentials!<br>
-                <small style="font-weight: 400; opacity: 0.9;">Edit <code>firebase-config.js</code> with your actual Firebase configuration from:<br>
+                <small style="font-weight: 400; opacity: 0.9;">Update the <code>firebaseConfig</code> object in <code>index.html</code> with your actual Firebase configuration from:<br>
                 Firebase Console > Project Settings > General > Your apps</small>
             `;
             document.body.appendChild(errorDiv);
