@@ -863,6 +863,10 @@
                 console.error('Auth error:', error);
                 updateAuthStatus('error', 'AUTH_ERR');
                 setFormsEnabled(false);
+                if (error.code === 'auth/invalid-api-key') {
+                    // The main config banner is already visible, but we can update the sidebar status.
+                    updateAuthStatus('error', 'BAD_KEY');
+                }
                 showAuthErrorBanner(error.code || 'unknown-error', getAuthErrorHelp(error));
             }
         }
