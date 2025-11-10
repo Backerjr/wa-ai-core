@@ -579,8 +579,8 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
         import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
-        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, setLogLevel } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
-        import { firebaseConfig } from './firebase-config.js';
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, setLogLevel, connectFirestoreEmulator } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+        import { firebaseConfig, connectToEmulators } from './firebase-config.js';
 
 
         // Enable Firestore debug logging
@@ -619,6 +619,9 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+
+        // Connect to emulators if in development mode (running on localhost)
+        connectToEmulators({ auth, db });
 
         // Particle Animation
         const canvas = document.getElementById('particleCanvas');

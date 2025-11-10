@@ -153,8 +153,10 @@ No build process required! Just open `index.html` in a browser after configuring
 Run the helper script to validate your environment and catch common misconfigurations:
 
 ```bash
-./scripts/diagnostics.sh
+npm run diagnostics
 ```
+
+This npm script simply wraps `./scripts/diagnostics.sh`, so you can still execute the shell script directly if you prefer.
 
 It will:
 - Install dependencies if `node_modules` is missing
