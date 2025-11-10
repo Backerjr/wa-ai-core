@@ -49,7 +49,10 @@ The generated CSS file is committed to the repository at `dist/output.css`, so e
 
 ## Firebase Setup
 
-**Quick Start**: Edit `firebase-config.js` with your Firebase credentials.
+**Quick Start**:
+1. Copy the template: `cp firebase-config.template.js firebase-config.js`
+2. Paste your Firebase credentials into the new `firebase-config.js` (this file stays local and is git-ignored)
+3. Run `./scripts/diagnostics.sh` to install dependencies, build CSS, and validate your configuration
 
 For detailed setup instructions, see [FIREBASE_SETUP.md](FIREBASE_SETUP.md).
 
@@ -144,6 +147,21 @@ To deploy these rules to your Firebase project:
 ## Development
 
 No build process required! Just open `index.html` in a browser after configuring Firebase.
+
+## Diagnostics & Status Checks
+
+Run the helper script to validate your environment and catch common misconfigurations:
+
+```bash
+./scripts/diagnostics.sh
+```
+
+It will:
+- Install dependencies if `node_modules` is missing
+- Build `dist/output.css`
+- Warn if `firebase-config.js` still uses placeholder or shared credentials
+- Copy `.firebaserc.template` to `.firebaserc` (if missing) so you can set your project ID
+- Confirm `firestore.rules` exists before you deploy
 
 ## License
 

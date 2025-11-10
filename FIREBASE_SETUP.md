@@ -6,9 +6,9 @@ This guide will help you configure the Rozmowa AI Core application with your own
 
 1. **Copy the configuration template**:
    ```bash
-   # The firebase-config.js file already exists with placeholder values
-   # Simply edit it with your actual Firebase credentials
+   cp firebase-config.template.js firebase-config.js
    ```
+   > `firebase-config.js` is ignored by git, so your credentials stay on your machine.
 
 2. **Get your Firebase configuration**:
    - Go to [Firebase Console](https://console.firebase.google.com/)
@@ -31,6 +31,14 @@ This guide will help you configure the Rozmowa AI Core application with your own
        appId: "your-app-id"                         // Replace this
    };
    ```
+
+4. **Run the diagnostics helper (optional but recommended)**:
+
+   ```bash
+   ./scripts/diagnostics.sh
+   ```
+
+   The script installs dependencies (if needed), rebuilds CSS, warns about placeholder credentials, and copies `.firebaserc.template` to `.firebaserc` so you can set your project ID.
 
 ## Detailed Setup
 
