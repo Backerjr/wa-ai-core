@@ -1,3 +1,19 @@
+// Firebase Configuration Template
+// 1. Copy this file to 'firebase-config.js'.
+// 2. Replace the placeholder values with your actual Firebase project configuration.
+// 3. IMPORTANT: Make sure 'firebase-config.js' is listed in your .gitignore file to prevent committing sensitive keys.
+//
+// Get your configuration from your Firebase project:
+// Firebase Console > Project Settings > General > Your apps (https://console.firebase.google.com/)
+
+export const firebaseConfig = {
+  apiKey: "REPLACE_WITH_YOUR_API_KEY",
+  authDomain: "REPLACE_WITH_YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
+  storageBucket: "REPLACE_WITH_YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "REPLACE_WITH_YOUR_MESSAGING_SENDER_ID",
+  appId: "REPLACE_WITH_YOUR_APP_ID"
+};
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
