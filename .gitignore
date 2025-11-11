@@ -1,13 +1,8 @@
-demo.html
-
-# CRITICAL: Don't commit real Firebase config
-firebase-config.js
-
-# Keep template
-!firebase-config.template.js
-
-# Firebase CLI configuration (user-specific)
-.firebaserc
-
-# Node modules
-node_modules/
+node_modules
+.next
+out
+.env*
+.DS_Store
+playwright-report
+coverage
+*.log
