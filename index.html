@@ -579,15 +579,16 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
         import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
-        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, setLogLevel } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
-        import { firebaseConfig } from './firebase-config.js';
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, setLogLevel, connectFirestoreEmulator } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+        import { firebaseConfig, connectToEmulators } from './firebase-config.js';
+
 
         // Enable Firestore debug logging
         setLogLevel('debug');
 
         // Check if Firebase config is still using placeholder values
-        if (firebaseConfig.apiKey === "AIzaSyDemoKey123456789" || firebaseConfig.apiKey === "YOUR_API_KEY") {
-            // Create and show prominent config error message
+        if (firebaseConfig.apiKey.startsWith("REPLACE_WITH_") || firebaseConfig.projectId.startsWith("REPLACE_WITH_")) {
+            // Create and show a prominent config error message
             const errorDiv = document.createElement('div');
             errorDiv.id = 'config-error';
             errorDiv.style.cssText = `
@@ -608,8 +609,8 @@
             `;
             errorDiv.innerHTML = `
                 ⚠️ FIREBASE CONFIG ERROR: Please configure your Firebase credentials!<br>
-                <small style="font-weight: 400; opacity: 0.9;">Edit <code>firebase-config.js</code> with your actual Firebase configuration from:<br>
-                Firebase Console > Project Settings > General > Your apps</small>
+                <small style="font-weight: 400; opacity: 0.9;">Copy <code>firebase-config.template.js</code> to <code>firebase-config.js</code> and add your project's credentials.<br>
+                See <code>FIREBASE_SETUP.md</code> for details.</small>
             `;
             document.body.appendChild(errorDiv);
         }
@@ -618,6 +619,9 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+
+        // Connect to emulators if in development mode (running on localhost)
+        connectToEmulators({ auth, db });
 
         // Particle Animation
         const canvas = document.getElementById('particleCanvas');
@@ -862,6 +866,10 @@
                 console.error('Auth error:', error);
                 updateAuthStatus('error', 'AUTH_ERR');
                 setFormsEnabled(false);
+                if (error.code === 'auth/invalid-api-key') {
+                    // The main config banner is already visible, but we can update the sidebar status.
+                    updateAuthStatus('error', 'BAD_KEY');
+                }
                 showAuthErrorBanner(error.code || 'unknown-error', getAuthErrorHelp(error));
             }
         }
