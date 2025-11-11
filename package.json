@@ -2,7 +2,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
     "watch:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "diagnostics": "bash ./scripts/diagnostics.sh"
+    "diagnostics": "bash ./scripts/diagnostics.sh",
+    "dev": "npm run dev --prefix my-firebase-app"
   },
   "dependencies": {
     "firebase": "^12.5.0"

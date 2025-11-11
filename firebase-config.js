@@ -1,43 +1,45 @@
-// firebase-config.js
+// Firebase Configuration Template
+// 1. Copy this file to 'firebase-config.js'.
+//    - The app will automatically connect to local emulators if running on localhost.
+// 2. Replace the placeholder values with your actual Firebase project configuration.
+// 3. IMPORTANT: Make sure 'firebase-config.js' is listed in your .gitignore file to prevent committing sensitive keys.
+//
+// Get your configuration from your Firebase project:
+// Firebase Console > Project Settings > General > Your apps (https://console.firebase.google.com/)
 
-import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  connectAuthEmulator,
-} from "firebase/auth";
-import {
-  getFirestore,
-  connectFirestoreEmulator,
-} from "firebase/firestore";
-import {
-  getStorage,
-  connectStorageEmulator,
-} from "firebase/storage";
-
-// --- Firebase Config ---
-// Get your config from Firebase Console → Project Settings → General → Your apps
 export const firebaseConfig = {
-  apiKey: "AIzaSyB8mZzYCujtcG5RylvCx18e6BRVp26kcFY",
-  authDomain: "studio-617595928-cae03.firebaseapp.com",
-  projectId: "studio-617595928-cae03",
-  storageBucket: "studio-617595928-cae03.firebasestorage.app",
-  messagingSenderId: "201908464871",
-  appId: "1:201908464871:web:e815d2a1cc1284225e4642"
+<<<<<<< HEAD
+  export const firebaseConfig = {
+    apiKey: "your-actual-api-key",              // Replace this
+    authDomain: "your-project.firebaseapp.com", // Replace this
+    projectId: "your-project-id",                // Replace this
+    storageBucket: "your-project.appspot.com",   // Replace this
+    messagingSenderId: "your-sender-id",         // Replace this
+    appId: "your-app-id"                         // Replace this
+=======
+  apiKey: "REPLACE_WITH_YOUR_API_KEY",
+  authDomain: "REPLACE_WITH_YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
+  storageBucket: "REPLACE_WITH_YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "REPLACE_WITH_YOUR_MESSAGING_SENDER_ID",
+  appId: "studio-617595928-cae03"
+>>>>>>> 6af7142 (save and close this editor to proceed with the commit. --- IGNORE ---)
 };
 
-// --- Initialize Firebase ---
-export const app = initializeApp(firebaseConfig);
-
-// --- Connect to Emulators (for local development) ---
-export function connectToEmulators() {
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  const storage = getStorage(app);
-
+/**
+ * Connects to local Firebase emulators if the app is running on localhost.
+ * This allows for local development and testing without affecting production data.
+ *
+ * @param {object} firebaseApp - The initialized Firebase app instance.
+ * @param {object} auth - The Firebase Auth instance.
+ * @param {object} db - The Firestore instance.
+ */
+export function connectToEmulators({ auth, db }) {
   if (window.location.hostname === "localhost") {
-    connectAuthEmulator(auth, "http://127.0.0.1:9099");
-    connectFirestoreEmulator(db, "127.0.0.1", 8080);
-    connectStorageEmulator(storage, "127.0.0.1", 9199);
-    console.log("🔥 Connected to Firebase emulators");
+    console.log("Development mode: Connecting to local Firebase emulators.");
+    // Point to the local Auth emulator
+    firebase.auth.connectAuthEmulator(auth, "http://localhost:9099");
+    // Point to the local Firestore emulator
+    firebase.firestore.connectFirestoreEmulator(db, "localhost", 8080);
   }
 }
