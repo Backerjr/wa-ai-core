@@ -1,3 +1,9 @@
+// firebase-config.js
+function connectToEmulators() {
+  // ... emulation connection logic
+}
+
+// Other firebase configurations
 // Your web app's Firebase configuration
 // Get your config from: Firebase Console > Project Settings > General > Your apps
 export const firebaseConfig = {
