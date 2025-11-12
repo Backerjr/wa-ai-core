@@ -188,7 +188,7 @@ export function MessagesView() {
                   />
                 </div>
                 <div className="flex gap-2">
-                  <Select value={filterStatus} onValueChange={(value: any) => setFilterStatus(value)}>
+                  <Select value={filterStatus} onValueChange={(value: "all" | "unread" | "starred") => setFilterStatus(value)}>
                     <SelectTrigger className="w-[140px]">
                       <Filter className="mr-2 h-4 w-4" />
                       <SelectValue />
