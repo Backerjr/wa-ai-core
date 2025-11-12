@@ -14,16 +14,33 @@ import { useToast } from "@/components/ui/use-toast";
 export function LessonPlanView() {
   const { toast } = useToast();
   const [isGenerating, setIsGenerating] = React.useState(false);
+  const isMountedRef = React.useRef(true);
+
+  React.useEffect(() => {
+    // Track mounted state
+    isMountedRef.current = true;
+    
+    return () => {
+      // Cleanup: mark component as unmounted
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const handleAIGenerate = () => {
     setIsGenerating(true);
-    setTimeout(() => {
-      setIsGenerating(false);
-      toast({
-        title: "AI Lesson Plan Generated",
-        description: "Review and customize the suggested content below.",
-      });
+    const timeoutId = setTimeout(() => {
+      // Only update state if component is still mounted
+      if (isMountedRef.current) {
+        setIsGenerating(false);
+        toast({
+          title: "AI Lesson Plan Generated",
+          description: "Review and customize the suggested content below.",
+        });
+      }
     }, 2000);
+
+    // Return cleanup function to clear timeout if needed
+    return () => clearTimeout(timeoutId);
   };
 
   const handleSave = () => {
