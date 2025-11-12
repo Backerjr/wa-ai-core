@@ -28,7 +28,7 @@ export function Topbar() {
         <div>
           <p className="text-sm text-slate-500">{today}</p>
           <h1 className="font-display text-2xl text-[var(--color-fg)]">
-            Good morning, Ms. Davis 🌤️
+            Good morning, Wiktoria 🌤️
           </h1>
           <p className="text-sm text-slate-500">
             Next: Grade 10 Math in 15 minutes — attendance and lesson plan ready.
@@ -54,7 +54,7 @@ export function Topbar() {
           </Button>
           <div
             className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-400 text-sm font-semibold text-white"
-            aria-label="Ms. Davis avatar"
+            aria-label="Wiktoria avatar"
           >
             MD
           </div>

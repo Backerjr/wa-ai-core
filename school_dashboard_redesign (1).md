@@ -13,7 +13,7 @@ These mockups visualize the AI-powered education ecosystem for **teachers**, **m
 +-------------------------------------------------------------------------------------+
 | School Logo             AI Dashboard                                                |
 |-------------------------------------------------------------------------------------|
-| [Sidebar]              | [Header] Good Morning, Ms. Davis 🌤️                       |
+| [Sidebar]              | [Header] Good Morning, Wiktoria 🌤️                       |
 | ----------------------- |-----------------------------------------------------------|
 | 🏠 Dashboard (Active)   | Next Class: Grade 10 Math (in 15 mins)                    |
 | 📚 My Classes           | [ Take Attendance → ]   [ View Lesson Plan → ]            |
@@ -32,7 +32,7 @@ These mockups visualize the AI-powered education ecosystem for **teachers**, **m
 ### Tablet View
 ```
 +------------------------------------------------------------+
-| ☰ | Good Morning, Ms. Davis 🌤️                             |
+| ☰ | Good Morning, Wiktoria 🌤️                             |
 |-------------------------------------------------------------|
 | Next Class: Grade 10 Math (15 min)   [Take Attendance →]    |
 |-------------------------------------------------------------|
@@ -46,7 +46,7 @@ These mockups visualize the AI-powered education ecosystem for **teachers**, **m
 ### Mobile View
 ```
 ───────────────────────────────
-👋 Good Morning, Ms. Davis
+👋 Good Morning, Wiktoria
 Next: Grade 10 Math (15m)
 [Take Attendance]
 ───────────────────────────────

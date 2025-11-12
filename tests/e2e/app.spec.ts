@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("teacher dashboard happy path", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("Good morning, Ms. Davis", { exact: false })).toBeVisible();
+  await expect(page.getByText("Good morning, Wiktoria", { exact: false })).toBeVisible();
 
   await page.getByRole("button", { name: /AI Command/i }).click();
   await page.getByText("/ask", { exact: false }).first().click();

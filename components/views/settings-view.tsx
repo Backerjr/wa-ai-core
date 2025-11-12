@@ -66,7 +66,7 @@ export function SettingsView() {
                   MD
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[var(--color-fg)]">Ms. Davis</h3>
+                  <h3 className="text-lg font-semibold text-[var(--color-fg)]">Wiktoria</h3>
                   <p className="text-sm text-slate-500">Mathematics Teacher</p>
                   <Button variant="outline" size="sm" className="mt-2">
                     Change Photo
@@ -82,7 +82,7 @@ export function SettingsView() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" defaultValue="Davis" />
+                    <Input id="lastName" defaultValue="Wiktoria" />
                   </div>
                 </div>
 

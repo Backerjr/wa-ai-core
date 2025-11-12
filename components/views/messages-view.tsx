@@ -44,7 +44,7 @@ const mockMessages: Message[] = [
     id: "1",
     from: "Sarah Johnson (Parent)",
     subject: "Question about homework assignment",
-    preview: "Hi Ms. Davis, my daughter mentioned the quadratic functions worksheet...",
+    preview: "Hi Wiktoria, my daughter mentioned the quadratic functions worksheet...",
     timestamp: "2 hours ago",
     read: false,
     starred: false,
