@@ -1,18 +1,18 @@
-import "@testing-library/jest-dom/vitest";
-import { vi } from "vitest";
-import React from "react";
+/// <reference types="vitest" />
+import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
-vi.mock("next/link", () => ({
-  default: React.forwardRef<HTMLAnchorElement, React.AnchorHTMLAttributes<HTMLAnchorElement>>(
-    ({ children, ...props }, ref) =>
-      React.createElement("a", {
-        ...props,
-        ref
-      }, children)
-  )
-}));
-
-vi.mock("next/navigation", () => ({
-  usePathname: () => "/",
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() })
-}));
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './tests/setup.ts',
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './'),
+    },
+  },
+})
