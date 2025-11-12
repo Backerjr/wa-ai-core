@@ -6,3 +6,5 @@ out
 playwright-report
 coverage
 *.log
+tsconfig.tsbuildinfo
+package-lock.json
