@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { aiInsights, teacherClasses } from "@/lib/data/mock";
+import { StudentSpotlight } from "@/components/views/student-spotlight";
 
 const quickActions = [
   {
@@ -130,6 +131,8 @@ export function TeacherDashboard() {
           </div>
         </div>
       </motion.div>
+
+      <StudentSpotlight />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
