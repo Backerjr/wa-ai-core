@@ -2,18 +2,23 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: "jsdom",
-    setupFiles: ["./tests/setup.ts"],
-    include: ["tests/unit/**/*.test.ts?(x)"],
-    exclude: ["tests/e2e/**"],
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./"),
+export default defineConfig((async () => {
+  const pluginResult = await react();
+  const plugins = Array.isArray(pluginResult) ? pluginResult : [pluginResult];
+
+  return {
+    plugins: plugins as any,
+    test: {
+      globals: true,
+      environment: "jsdom",
+      setupFiles: ["./tests/setup.ts"],
+      include: ["tests/unit/**/*.test.ts?(x)"],
+      exclude: ["tests/e2e/**"],
     },
-  },
-});
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./"),
+      },
+    },
+  };
+})());
