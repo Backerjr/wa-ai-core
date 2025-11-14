@@ -94,6 +94,7 @@ export function TeacherDashboard() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-slate-500">What&apos;s Next</p>
+              <p className="text-sm text-slate-500">What&apos;s Next</p>
               <h2 className="text-2xl font-semibold text-[var(--color-fg)]">
                 Grade 10 Math • Quadratic Functions
               </h2>
