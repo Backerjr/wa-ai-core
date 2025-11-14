@@ -4,16 +4,16 @@
 
 :root {
   --core-black: #000000;
-  --background: #0B0D10;
+  --background: #0b0d10;
   --surface: #111318;
-  --soft-white: #F5F5F5;
-  --primary: #4C63E0;
-  --secondary: #26C6DA;
-  --highlight: #FFD166;
-  --signal-green: #39FF14;
-  --alert-red: #FF3131;
-  --text-primary: #E6E8EC;
-  --text-secondary: #A2A9B2;
+  --soft-white: #f5f5f5;
+  --primary: #4c63e0;
+  --secondary: #26c6da;
+  --highlight: #ffd166;
+  --signal-green: #39ff14;
+  --alert-red: #ff3131;
+  --text-primary: #e6e8ec;
+  --text-secondary: #a2a9b2;
 }
 
 * {

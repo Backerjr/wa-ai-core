@@ -15,7 +15,7 @@ export const firebaseConfig = {
   messagingSenderId: "201908464871",
   appId: "1:201908464871:web:e815d2a1cc1284225e4642",
   // OPTIONAL:
-  measurementId: "G-EXAMPLEID"
+  measurementId: "G-EXAMPLEID",
 };
 
 /**

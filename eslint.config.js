@@ -26,7 +26,6 @@ export default tseslint.config(
     ],
   },
 
-
   ...tseslint.configs.recommendedTypeChecked, // TypeScript recommended rules with type checking
   {
     // Configuration for JavaScript and TypeScript files

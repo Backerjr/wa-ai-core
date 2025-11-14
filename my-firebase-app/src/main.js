@@ -9,7 +9,7 @@ const firebaseConfig = {
   storageBucket: "YOUR_STORAGE_BUCKET",
   messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
   appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID"
+  measurementId: "YOUR_MEASUREMENT_ID",
 };
 
 // Initialize Firebase
@@ -18,12 +18,12 @@ const analytics = getAnalytics(app);
 
 console.log("Firebase initialized successfully!");
 // Your app logic here...
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import "./style.css";
+import javascriptLogo from "./javascript.svg";
+import viteLogo from "/vite.svg";
+import { setupCounter } from "./counter.js";
 
-document.querySelector('#app').innerHTML = `
+document.querySelector("#app").innerHTML = `
   <div>
     <a href="https://vite.dev" target="_blank">
       <img src="${viteLogo}" class="logo" alt="Vite logo" />
@@ -39,6 +39,6 @@ document.querySelector('#app').innerHTML = `
       Click on the Vite logo to learn more
     </p>
   </div>
-`
+`;
 
-setupCounter(document.querySelector('#counter'))
+setupCounter(document.querySelector("#counter"));
