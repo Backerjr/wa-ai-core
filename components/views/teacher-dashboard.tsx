@@ -55,6 +55,11 @@ const addGradeSchema = z.object({
 
 type AddGradeValues = z.infer<typeof addGradeSchema>;
 
+/*************  ✨ Windsurf Command 🌟  *************/
+/**
+ * Teacher dashboard page
+ * @returns {JSX.Element} Teacher dashboard page
+ */
 export function TeacherDashboard() {
   const { toast } = useToast();
   const [addGradeOpen, setAddGradeOpen] = React.useState(false);
@@ -73,6 +78,10 @@ export function TeacherDashboard() {
     },
   });
 
+  /**
+   * Handle form submission
+   * @param {AddGradeValues} values Form values
+   */
   const onSubmit = (values: AddGradeValues) => {
     toast({
       title: "Grade staged",
@@ -120,6 +129,7 @@ export function TeacherDashboard() {
           </div>
         </div>
         <div className="rounded-3xl border border-white/40 bg-white/80 p-6 shadow-card">
+          <h3 className="text-lg font-semibold text-[var(--color-fg)]">AI Insights</h3>
           <h3 className="text-lg font-semibold text-[var(--color-fg)]">AI Insights 💡</h3>
           <p className="text-sm text-slate-500">3 students showed consistent lateness.</p>
           <div className="mt-4 space-y-4">
@@ -265,3 +275,4 @@ export function TeacherDashboard() {
     </section>
   );
 }
+/*******  c372fcc5-d829-44fb-ae84-74dbaa67313b  *******/
