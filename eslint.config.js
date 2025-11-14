@@ -16,7 +16,9 @@ export default tseslint.config(
       "next-env.d.ts",
       "node_modules/**",
       "eslint.config.js",
-      ".storybook/",
+      ".storybook/**",
+      "**/*.stories.tsx",
+      "**/*.stories.ts",
       "firebase-config.js",
       "firebase-config.template.js",
       "my-firebase-app/**",
@@ -25,7 +27,6 @@ export default tseslint.config(
       "next.config.mjs",
     ],
   },
-
 
   ...tseslint.configs.recommendedTypeChecked, // TypeScript recommended rules with type checking
   {
@@ -72,28 +73,27 @@ export default tseslint.config(
       // Custom rules or overrides
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "@typescript-eslint/explicit-module-boundary-types": "off", // Adjust as needed
-      // Add any other rules you want to enforce or override
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/ban-types": "off",
-      "@typescript-eslint/ban-ts-comment": "off",
-      "no-case-declarations": "off",
-      "no-undef": "off",
-      "no-constant-binary-expression": "off",
-      "no-empty": "off",
-      "no-fallthrough": "off",
-      "no-func-assign": "off",
-      "no-prototype-builtins": "off",
-      "no-redeclare": "off",
-      "no-sparse-arrays": "off",
-      "@typescript-eslint/no-this-alias": "off",
-      "no-unsafe-optional-chaining": "off",
-      "no-unused-private-class-members": "off",
-      "no-useless-escape": "off",
-      "@typescript-eslint/no-var-requires": "off",
-      "getter-return": "off",
-      "no-control-regex": "off",
-      "valid-typeof": "off",
-      "no-misleading-character-class": "off",
+      // Re-enabled rules to improve code quality
+      "@typescript-eslint/no-explicit-any": "warn", // Keep as warn for gradual adoption
+      "@typescript-eslint/ban-types": "error",
+      "@typescript-eslint/ban-ts-comment": "warn", // Keep as warn for legitimate use cases
+      "no-case-declarations": "error",
+      "no-constant-binary-expression": "error",
+      "no-empty": "warn", // Keep as warn for legitimate empty blocks
+      "no-fallthrough": "error",
+      "no-func-assign": "error",
+      "no-prototype-builtins": "error",
+      "no-redeclare": "error",
+      "no-sparse-arrays": "error",
+      "@typescript-eslint/no-this-alias": "error",
+      "no-unsafe-optional-chaining": "error",
+      "no-unused-private-class-members": "warn",
+      "no-useless-escape": "error",
+      "@typescript-eslint/no-var-requires": "error",
+      "getter-return": "error",
+      "no-control-regex": "error",
+      "valid-typeof": "error",
+      "no-misleading-character-class": "error",
     },
     settings: {
       react: {
