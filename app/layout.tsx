@@ -10,21 +10,17 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
-  weight: ["400", "600", "700"]
+  weight: ["400", "600", "700"],
 });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   title: "Next-Gen AI Education Platform",
   description:
-    "Teacher, manager, and student experiences unified by an AI Command Center."
+    "Teacher, manager, and student experiences unified by an AI Command Center.",
 };
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="bg-[var(--color-bg)]">
       <body className={cn(inter.variable, playfair.variable, outfit.variable)}>

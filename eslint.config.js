@@ -1,62 +1,82 @@
-import globals from "globals/index.js";
-import pluginJs from "@eslint/js/src/index.js";
+import globals from "globals";
+import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
-import react from "eslint-plugin-react";
-import nextPlugin from "@next/eslint-plugin-next/dist/index.js";
+import pluginReact from "eslint-plugin-react";
+import nextPlugin from "@next/eslint-plugin-next";
+import prettierConfig from "eslint-config-prettier";
 import pluginPrettier from "eslint-plugin-prettier";
-import { FlatCompat } from "eslint-compat-utils";
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  resolvePluginsRelativeTo: __dirname,
-});
-
-export default [
+export default tseslint.config(
   {
-    ignores: ["eslint.config.js", ".storybook/", ".next/"],
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
+    // Global ignores for common Next.js build and output directories
+    ignores: [
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+      "node_modules/**",
+      "eslint.config.js",
+      ".storybook/",
+      "firebase-config.js",
+      "firebase-config.template.js",
+      "my-firebase-app/**",
+      "postcss.config.js",
+      "tailwind.config.js",
+      "next.config.mjs",
+    ],
   },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...compat.extends(react.configs.recommended),
+
+
+  ...tseslint.configs.recommendedTypeChecked, // TypeScript recommended rules with type checking
   {
-    files: ["**/*.{ts,tsx}", "!**/.next/**"],
+    // Configuration for JavaScript and TypeScript files
+    files: ["**/*.{ts,tsx,jsx}"],
     languageOptions: {
-      parser: tseslint.parser,
+      parser: tseslint.parser, // Use the TypeScript ESLint parser
       parserOptions: {
         ecmaFeatures: { jsx: true },
-        project: ["./tsconfig.json"],
+        ecmaVersion: "latest",
+        sourceType: "module",
+        project: ["./tsconfig.json"], // Specify your tsconfig.json for type-aware linting
       },
       globals: {
         ...globals.browser,
         ...globals.node,
+        // Add any other global variables your project uses
         _N_E: "readonly",
         __REACT_DEVTOOLS_GLOBAL_HOOK__: "readonly",
         MSApp: "readonly",
         ActiveXObject: "readonly",
         Bun: "readonly",
         Deno: "readonly",
+        firebase: "readonly",
       },
     },
     plugins: {
-      "@typescript-eslint": tseslint.plugin,
+      react: pluginReact,
       "@next/next": nextPlugin,
+      // You might need to explicitly add 'typescript-eslint' plugin here if not covered by tseslint.configs
+      // 'typescript-eslint': tseslint.plugin,
     },
     rules: {
-      ...compat.extends(nextPlugin.configs.recommended).rules,
-      ...compat.extends(nextPlugin.configs["core-web-vitals"]).rules,
-      "@next/next/no-html-link-for-pages": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "react/react-in-jsx-scope": "off",
+      // React specific rules
+      ...pluginReact.configs.recommended.rules,
+      ...pluginReact.configs["jsx-runtime"].rules, // For new JSX transform
+      "react/prop-types": "off", // Not needed with TypeScript
+      "react/react-in-jsx-scope": "off", // Not needed with Next.js 13+ and new JSX transform
+
+      // Next.js specific rules
+      ...nextPlugin.configs.recommended.rules, // Recommended Next.js rules
+      ...nextPlugin.configs["core-web-vitals"].rules, // Next.js Core Web Vitals rules
+
+      // Custom rules or overrides
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/explicit-module-boundary-types": "off", // Adjust as needed
+      // Add any other rules you want to enforce or override
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/ban-types": "off",
       "@typescript-eslint/ban-ts-comment": "off",
       "no-case-declarations": "off",
-      "react/prop-types": "off",
       "no-undef": "off",
       "no-constant-binary-expression": "off",
       "no-empty": "off",
@@ -75,40 +95,38 @@ export default [
       "valid-typeof": "off",
       "no-misleading-character-class": "off",
     },
+    settings: {
+      react: {
+        version: "detect", // Automatically detect the React version
+      },
+      // If you are using @next/eslint-plugin-next in a monorepo, you might need to specify the Next.js root directory
+      // "next": {
+      //   "rootDir": "apps/my-next-app/",
+      // },
+    },
   },
   {
-    files: ["**/*.{js,mjs,cjs}", "!**/.next/**"],
+    files: ["**/*.{js,mjs,cjs}"],
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node,
-        _N_E: "readonly",
-        __REACT_DEVTOOLS_GLOBAL_HOOK__: "readonly",
-        MSApp: "readonly",
-        ActiveXObject: "readonly",
-        Bun: "readonly",
-        Deno: "readonly",
       },
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": "off",
+      ...pluginJs.configs.recommended.rules,
+      // Add any specific rules for JavaScript files here
     },
   },
+
+  // Optional: Add Prettier integration if you use it
   {
-    files: [".storybook/**/*.{js,ts,tsx}"],
-    languageOptions: {
-      parserOptions: {
-        project: null,
-      },
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    plugins: {
+      prettier: pluginPrettier,
+    },
+    rules: {
+      "prettier/prettier": "error",
     },
   },
-  {
-    files: ["firebase-config.js", "firebase-config.template.js"],
-    languageOptions: {
-      globals: {
-        firebase: "readonly",
-      },
-    },
-  },
-  pluginPrettier.configs.recommended,
-];
+);

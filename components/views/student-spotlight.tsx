@@ -5,11 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { studentSpotlight } from "@/lib/data/spotlight";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 export function StudentSpotlight() {
   return (
@@ -20,7 +16,9 @@ export function StudentSpotlight() {
     >
       <Card className="rounded-3xl border border-white/40 bg-white/80 p-6 shadow-card">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-[var(--color-fg)]">Student Spotlight 🌟</CardTitle>
+          <CardTitle className="text-lg font-semibold text-[var(--color-fg)]">
+            Student Spotlight 🌟
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Carousel>

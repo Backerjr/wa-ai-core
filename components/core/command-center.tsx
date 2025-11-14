@@ -10,7 +10,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList
+  CommandList,
 } from "@/components/ui/command";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,7 @@ export function CommandCenter() {
     openCommandCenter,
     closeCommandCenter,
     pushCommandResponse,
-    commandHistory
+    commandHistory,
   } = useUIStore();
   const [query, setQuery] = React.useState("");
 
@@ -55,7 +55,7 @@ export function CommandCenter() {
   }, [openCommandCenter]);
 
   const runCommand = (command: string) => {
-    const trimmed = command.split(" ")[0] as string;
+    const trimmed = command.split(" ")[0];
     const result = generateResponse(trimmed);
     pushCommandResponse({ command: trimmed, result });
     toast({ title: "AI Command executed", description: result });
@@ -64,7 +64,9 @@ export function CommandCenter() {
   return (
     <CommandDialog
       open={commandCenterOpen}
-      onOpenChange={(isOpen: boolean) => (isOpen ? openCommandCenter() : closeCommandCenter())}
+      onOpenChange={(isOpen: boolean) =>
+        isOpen ? openCommandCenter() : closeCommandCenter()
+      }
     >
       <Command className="shadow-none">
         <CommandInput
@@ -83,7 +85,9 @@ export function CommandCenter() {
                   runCommand(value);
                 }}
               >
-                <span className="font-semibold text-[var(--color-fg)]">{item.command}</span>
+                <span className="font-semibold text-[var(--color-fg)]">
+                  {item.command}
+                </span>
                 <span className="ml-2 text-sm text-slate-500">{item.description}</span>
               </CommandItem>
             ))}
@@ -110,7 +114,10 @@ export function CommandCenter() {
           ) : (
             <div className="space-y-3">
               {commandHistory.slice(0, 3).map((entry: CommandResponse) => (
-                <div key={entry.id} className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-sm">
+                <div
+                  key={entry.id}
+                  className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-sm"
+                >
                   <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
                     <Badge variant="outline">{entry.command}</Badge>
                     <span>Response</span>

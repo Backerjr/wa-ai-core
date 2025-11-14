@@ -40,7 +40,7 @@ const SheetContent = React.forwardRef<
         side === "left" && "left-0 top-0 max-w-md border-r",
         side === "top" && "left-0 top-0 border-b",
         side === "bottom" && "bottom-0 left-0 border-t",
-        className
+        className,
       )}
       {...props}
     >
@@ -63,7 +63,11 @@ const SheetTitle = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <SheetPrimitive.Title ref={ref} className={cn("text-xl font-semibold", className)} {...props} />
+  <SheetPrimitive.Title
+    ref={ref}
+    className={cn("text-xl font-semibold", className)}
+    {...props}
+  />
 ));
 SheetTitle.displayName = SheetPrimitive.Title.displayName;
 
@@ -88,5 +92,5 @@ export {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetDescription
+  SheetDescription,
 };

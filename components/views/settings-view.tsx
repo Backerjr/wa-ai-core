@@ -66,7 +66,9 @@ export function SettingsView() {
                   MD
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[var(--color-fg)]">Wiktoria</h3>
+                  <h3 className="text-lg font-semibold text-[var(--color-fg)]">
+                    Wiktoria
+                  </h3>
                   <p className="text-sm text-slate-500">Mathematics Teacher</p>
                   <Button variant="outline" size="sm" className="mt-2">
                     Change Photo
@@ -210,11 +212,15 @@ export function SettingsView() {
                   </p>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="quiet-start" className="text-xs">Start Time</Label>
+                      <Label htmlFor="quiet-start" className="text-xs">
+                        Start Time
+                      </Label>
                       <Input id="quiet-start" type="time" defaultValue="22:00" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="quiet-end" className="text-xs">End Time</Label>
+                      <Label htmlFor="quiet-end" className="text-xs">
+                        End Time
+                      </Label>
                       <Input id="quiet-end" type="time" defaultValue="07:00" />
                     </div>
                   </div>
@@ -233,7 +239,10 @@ export function SettingsView() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between p-4 rounded-lg border border-slate-200">
                       <div className="space-y-0.5">
-                        <Label htmlFor="dark-mode" className="text-base flex items-center gap-2">
+                        <Label
+                          htmlFor="dark-mode"
+                          className="text-base flex items-center gap-2"
+                        >
                           <Moon className="h-4 w-4" />
                           Dark Mode
                         </Label>
@@ -307,7 +316,9 @@ export function SettingsView() {
                         <div className="h-20 bg-slate-200 rounded" />
                         <div className="h-12 bg-slate-200 rounded" />
                       </div>
-                      <p className="text-xs font-medium mt-2 text-slate-600">Comfortable</p>
+                      <p className="text-xs font-medium mt-2 text-slate-600">
+                        Comfortable
+                      </p>
                     </button>
                   </div>
                 </div>
@@ -357,14 +368,18 @@ export function SettingsView() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-[var(--color-fg)] mb-3">Active Sessions</h4>
+                  <h4 className="font-semibold text-[var(--color-fg)] mb-3">
+                    Active Sessions
+                  </h4>
                   <div className="space-y-2">
                     <div className="p-4 rounded-lg border border-slate-200 flex items-center justify-between">
                       <div>
                         <p className="font-medium text-sm text-[var(--color-fg)]">
                           Chrome on Windows
                         </p>
-                        <p className="text-xs text-slate-500">Current session • Active now</p>
+                        <p className="text-xs text-slate-500">
+                          Current session • Active now
+                        </p>
                       </div>
                       <Button variant="outline" size="sm" disabled>
                         Current

@@ -8,7 +8,7 @@ describe("calculateFinalGrade", () => {
       assignment: 90,
       project: 80,
       assessment: 70,
-      aiInsight: ""
+      aiInsight: "",
     });
 
     // 90*.4 + 80*.3 + 70*.3 = 81

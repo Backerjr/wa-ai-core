@@ -16,7 +16,7 @@ const Command = React.forwardRef<
     ref={ref}
     className={cn(
       "flex h-full w-full flex-col rounded-2xl bg-white/90 text-slate-900",
-      className
+      className,
     )}
     {...props}
   />
@@ -44,7 +44,7 @@ const CommandInput = React.forwardRef<
       ref={ref}
       className={cn(
         "flex h-14 w-full bg-transparent py-4 text-base outline-none placeholder:text-slate-400",
-        className
+        className,
       )}
       {...props}
     />
@@ -68,7 +68,11 @@ const CommandEmpty = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Empty>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
 >((props, ref) => (
-  <CommandPrimitive.Empty ref={ref} className="px-4 py-6 text-center text-sm" {...props} />
+  <CommandPrimitive.Empty
+    ref={ref}
+    className="px-4 py-6 text-center text-sm"
+    {...props}
+  />
 ));
 CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
@@ -92,7 +96,7 @@ const CommandItem = React.forwardRef<
     ref={ref}
     className={cn(
       "flex cursor-pointer select-none items-center gap-2 rounded-xl px-4 py-3 text-sm text-slate-700 aria-selected:bg-blue-50",
-      className
+      className,
     )}
     {...props}
   />
@@ -114,5 +118,5 @@ export {
   CommandEmpty,
   CommandGroup,
   CommandItem,
-  CommandShortcut
+  CommandShortcut,
 };

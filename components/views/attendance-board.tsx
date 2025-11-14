@@ -13,7 +13,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useToast } from "@/components/ui/use-toast";
 import { AttendanceStatus, StudentRecord, type ClassSummary } from "@/lib/data/mock";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type ClassOption = Pick<ClassSummary, "id" | "title">;
 
@@ -28,7 +34,7 @@ export function AttendanceBoard({
   classNameLabel,
   classId,
   students,
-  classOptions
+  classOptions,
 }: AttendanceBoardProps) {
   const router = useRouter();
   const [selectedDate, setSelectedDate] = React.useState<Date>(new Date());
@@ -38,25 +44,32 @@ export function AttendanceBoard({
 
   const updateStatus = (studentId: string, status: AttendanceStatus) => {
     setRecords((prev) =>
-      prev.map((student) => (student.id === studentId ? { ...student, status } : student))
+      prev.map((student) =>
+        student.id === studentId ? { ...student, status } : student,
+      ),
     );
     const studentName = records.find((student) => student.id === studentId)?.name;
     toast({
       title: `${studentName ?? "Student"} marked ${status}`,
-      description: format(selectedDate, "MMM d")
+      description: format(selectedDate, "MMM d"),
     });
   };
 
   const updateNotes = (notes: string) => {
     if (!activeStudent) return;
     setRecords((prev) =>
-      prev.map((student) => (student.id === activeStudent.id ? { ...student, notes } : student))
+      prev.map((student) =>
+        student.id === activeStudent.id ? { ...student, notes } : student,
+      ),
     );
     setActiveStudent({ ...activeStudent, notes });
   };
 
   const saveAll = () => {
-    toast({ title: "Attendance saved", description: `Synced ${records.length} students for ${format(selectedDate, "MMM d")}.` });
+    toast({
+      title: "Attendance saved",
+      description: `Synced ${records.length} students for ${format(selectedDate, "MMM d")}.`,
+    });
   };
 
   return (
@@ -94,7 +107,12 @@ export function AttendanceBoard({
               </Button>
             </PopoverTrigger>
             <PopoverContent align="end" className="p-0">
-              <Calendar mode="single" selected={selectedDate} onSelect={(date) => date && setSelectedDate(date)} initialFocus />
+              <Calendar
+                mode="single"
+                selected={selectedDate}
+                onSelect={(date) => date && setSelectedDate(date)}
+                initialFocus
+              />
             </PopoverContent>
           </Popover>
           <Button variant="outline" className="gap-2">
@@ -121,10 +139,16 @@ export function AttendanceBoard({
               className="grid grid-cols-1 gap-4 px-4 py-4 md:grid-cols-[2fr_1fr_1fr] md:items-center"
             >
               <div>
-                <p className="text-sm font-semibold text-[var(--color-fg)]">{student.name}</p>
+                <p className="text-sm font-semibold text-[var(--color-fg)]">
+                  {student.name}
+                </p>
                 <p className="text-xs text-slate-500">ID: {student.id}</p>
               </div>
-              <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={`${student.name} status`}>
+              <div
+                className="flex flex-wrap gap-2"
+                role="radiogroup"
+                aria-label={`${student.name} status`}
+              >
                 {(["Present", "Absent", "Tardy"] as AttendanceStatus[]).map((status) => (
                   <StatusChip
                     key={status}
@@ -149,7 +173,10 @@ export function AttendanceBoard({
         </div>
       </div>
 
-      <Sheet open={!!activeStudent} onOpenChange={(open) => !open && setActiveStudent(null)}>
+      <Sheet
+        open={!!activeStudent}
+        onOpenChange={(open) => !open && setActiveStudent(null)}
+      >
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Notes for {activeStudent?.name}</SheetTitle>

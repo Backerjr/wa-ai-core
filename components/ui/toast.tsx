@@ -16,7 +16,7 @@ const ToastViewport = React.forwardRef<
     ref={ref}
     className={cn(
       "fixed bottom-6 right-6 z-[100] flex max-h-screen w-full max-w-sm flex-col gap-3",
-      className
+      className,
     )}
     {...props}
   />
@@ -31,7 +31,7 @@ const Toast = React.forwardRef<
     ref={ref}
     className={cn(
       "glass-card grid w-full gap-2 rounded-2xl border border-white/40 bg-white/90 p-4 shadow-card",
-      className
+      className,
     )}
     {...props}
   />
@@ -70,7 +70,7 @@ const ToastClose = React.forwardRef<
     ref={ref}
     className={cn(
       "absolute right-4 top-4 rounded-full p-1 text-slate-400 transition hover:bg-slate-100",
-      className
+      className,
     )}
     toast-close=""
     {...props}

@@ -8,7 +8,10 @@ test("teacher dashboard happy path", async ({ page }) => {
   await page.getByText("/ask", { exact: false }).first().click();
   await expect(page.getByText(/AI Command executed/i)).toBeVisible();
 
-  await page.getByRole("link", { name: /Take Attendance/i }).first().click();
+  await page
+    .getByRole("link", { name: /Take Attendance/i })
+    .first()
+    .click();
   await expect(page).toHaveURL(/attendance/);
 
   const tardyChip = page

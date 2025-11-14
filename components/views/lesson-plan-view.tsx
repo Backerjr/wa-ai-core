@@ -19,7 +19,7 @@ export function LessonPlanView() {
   React.useEffect(() => {
     // Track mounted state
     isMountedRef.current = true;
-    
+
     return () => {
       // Cleanup: mark component as unmounted
       isMountedRef.current = false;
@@ -65,11 +65,7 @@ export function LessonPlanView() {
             </p>
           </div>
           <div className="flex gap-2">
-            <Button
-              variant="outline"
-              onClick={handleAIGenerate}
-              disabled={isGenerating}
-            >
+            <Button variant="outline" onClick={handleAIGenerate} disabled={isGenerating}>
               <Sparkles className="mr-2 h-4 w-4" />
               {isGenerating ? "Generating..." : "AI Generate"}
             </Button>
@@ -136,19 +132,39 @@ export function LessonPlanView() {
               <TabsContent value="activities" className="space-y-4 mt-4">
                 <div className="space-y-4">
                   {[
-                    { time: "0-10 min", title: "Warm-up & Review", desc: "Review linear functions and introduce parabolas" },
-                    { time: "10-25 min", title: "Direct Instruction", desc: "Teach quadratic equation components and graphing" },
-                    { time: "25-40 min", title: "Guided Practice", desc: "Students practice graphing with teacher support" },
-                    { time: "40-50 min", title: "Independent Work", desc: "Complete worksheet problems individually" },
+                    {
+                      time: "0-10 min",
+                      title: "Warm-up & Review",
+                      desc: "Review linear functions and introduce parabolas",
+                    },
+                    {
+                      time: "10-25 min",
+                      title: "Direct Instruction",
+                      desc: "Teach quadratic equation components and graphing",
+                    },
+                    {
+                      time: "25-40 min",
+                      title: "Guided Practice",
+                      desc: "Students practice graphing with teacher support",
+                    },
+                    {
+                      time: "40-50 min",
+                      title: "Independent Work",
+                      desc: "Complete worksheet problems individually",
+                    },
                   ].map((activity, idx) => (
                     <Card key={idx} className="p-4 border-l-4 border-l-blue-500">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <Clock className="h-4 w-4 text-slate-500" />
-                            <span className="text-xs font-medium text-slate-500">{activity.time}</span>
+                            <span className="text-xs font-medium text-slate-500">
+                              {activity.time}
+                            </span>
                           </div>
-                          <h4 className="font-semibold text-[var(--color-fg)]">{activity.title}</h4>
+                          <h4 className="font-semibold text-[var(--color-fg)]">
+                            {activity.title}
+                          </h4>
                           <p className="text-sm text-slate-600 mt-1">{activity.desc}</p>
                         </div>
                       </div>
@@ -172,8 +188,12 @@ export function LessonPlanView() {
                     <Card key={idx} className="p-4 flex items-center gap-3">
                       <FileText className="h-5 w-5 text-blue-600" />
                       <div className="flex-1">
-                        <Badge variant="outline" className="mb-1">{resource.type}</Badge>
-                        <p className="text-sm font-medium text-[var(--color-fg)]">{resource.name}</p>
+                        <Badge variant="outline" className="mb-1">
+                          {resource.type}
+                        </Badge>
+                        <p className="text-sm font-medium text-[var(--color-fg)]">
+                          {resource.name}
+                        </p>
                       </div>
                     </Card>
                   ))}
@@ -225,15 +245,23 @@ export function LessonPlanView() {
               <div className="space-y-3">
                 <div className="rounded-lg bg-blue-50 p-3 text-sm">
                   <p className="font-medium text-blue-900 mb-1">Engagement Tip</p>
-                  <p className="text-blue-700">Start with a real-world example like projectile motion to hook students.</p>
+                  <p className="text-blue-700">
+                    Start with a real-world example like projectile motion to hook
+                    students.
+                  </p>
                 </div>
                 <div className="rounded-lg bg-green-50 p-3 text-sm">
                   <p className="font-medium text-green-900 mb-1">Common Misconception</p>
-                  <p className="text-green-700">Many students confuse the vertex with the y-intercept. Address this early.</p>
+                  <p className="text-green-700">
+                    Many students confuse the vertex with the y-intercept. Address this
+                    early.
+                  </p>
                 </div>
                 <div className="rounded-lg bg-purple-50 p-3 text-sm">
                   <p className="font-medium text-purple-900 mb-1">Extension Activity</p>
-                  <p className="text-purple-700">Have advanced students explore transformations of parent functions.</p>
+                  <p className="text-purple-700">
+                    Have advanced students explore transformations of parent functions.
+                  </p>
                 </div>
               </div>
             </Card>

@@ -17,9 +17,9 @@ export function Topbar() {
       new Intl.DateTimeFormat("en-US", {
         weekday: "long",
         month: "short",
-        day: "numeric"
+        day: "numeric",
       }).format(new Date()),
-    []
+    [],
   );
 
   return (
@@ -66,7 +66,10 @@ export function Topbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-80 border-none bg-white/90">
-              <SidebarNavList collapsed={false} onNavigate={() => setMobileNavOpen(false)} />
+              <SidebarNavList
+                collapsed={false}
+                onNavigate={() => setMobileNavOpen(false)}
+              />
             </SheetContent>
           </Sheet>
         </div>

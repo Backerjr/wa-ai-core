@@ -22,7 +22,7 @@ const DialogOverlay = React.forwardRef<
     ref={ref}
     className={cn(
       "fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out",
-      className
+      className,
     )}
     {...props}
   />
@@ -39,7 +39,7 @@ const DialogContent = React.forwardRef<
       ref={ref}
       className={cn(
         "fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white p-8 shadow-2xl focus:outline-none",
-        className
+        className,
       )}
       {...props}
     >
@@ -91,5 +91,5 @@ export {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription
+  DialogDescription,
 };

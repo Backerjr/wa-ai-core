@@ -12,8 +12,12 @@ export function StudentPortal() {
     <section className="space-y-6">
       <Card className="rounded-3xl border border-white/40 p-6">
         <p className="text-sm text-slate-500">Welcome back</p>
-        <h2 className="font-display text-3xl text-[var(--color-fg)]">Hi {studentProgress.name} 👋</h2>
-        <p className="text-sm text-slate-500">Here&apos;s how you&apos;re growing this week.</p>
+        <h2 className="font-display text-3xl text-[var(--color-fg)]">
+          Hi {studentProgress.name} 👋
+        </h2>
+        <p className="text-sm text-slate-500">
+          Here&apos;s how you&apos;re growing this week.
+        </p>
       </Card>
 
       <div className="grid gap-4 md:grid-cols-3">

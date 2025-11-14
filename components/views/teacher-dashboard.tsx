@@ -18,7 +18,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import {
@@ -26,7 +26,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { aiInsights, teacherClasses } from "@/lib/data/mock";
@@ -37,20 +37,20 @@ const quickActions = [
     label: "Message Parent",
     description: "Send recap",
     href: "/messages",
-    icon: MessageSquare
+    icon: MessageSquare,
   },
   {
     label: "Create Quiz",
     description: "AI-assisted",
     href: "/quiz",
-    icon: NotebookPen
-  }
+    icon: NotebookPen,
+  },
 ];
 
 const addGradeSchema = z.object({
   student: z.string().min(1, "Student is required"),
   category: z.enum(["assignment", "project", "assessment"]),
-  score: z.coerce.number().min(0, "Min 0").max(100, "Max 100")
+  score: z.coerce.number().min(0, "Min 0").max(100, "Max 100"),
 });
 
 type AddGradeValues = z.infer<typeof addGradeSchema>;
@@ -63,20 +63,20 @@ export function TeacherDashboard() {
     handleSubmit,
     reset,
     register,
-    formState: { errors }
+    formState: { errors },
   } = useForm<AddGradeValues>({
     resolver: zodResolver(addGradeSchema),
     defaultValues: {
       student: "",
       category: "assignment",
-      score: 92
-    }
+      score: 92,
+    },
   });
 
   const onSubmit = (values: AddGradeValues) => {
     toast({
       title: "Grade staged",
-      description: `${values.student} logged for ${values.category} (${values.score}%)`
+      description: `${values.student} logged for ${values.category} (${values.score}%)`,
     });
     setAddGradeOpen(false);
     reset();
@@ -97,7 +97,9 @@ export function TeacherDashboard() {
               <h2 className="text-2xl font-semibold text-[var(--color-fg)]">
                 Grade 10 Math • Quadratic Functions
               </h2>
-              <p className="text-sm text-slate-500">15 minutes • Room 201 • 32 students</p>
+              <p className="text-sm text-slate-500">
+                15 minutes • Room 201 • 32 students
+              </p>
             </div>
             <Badge variant="outline">Live Prep</Badge>
           </div>
@@ -125,7 +127,7 @@ export function TeacherDashboard() {
                 key={insight.id}
                 title={insight.title}
                 detail={insight.detail}
-                severity={insight.severity as "success" | "warning" | "info"}
+                severity={insight.severity}
               />
             ))}
           </div>
@@ -148,98 +150,105 @@ export function TeacherDashboard() {
             meta={`${Math.round(cls.averageGrade * 100)}% avg • ${Math.round(cls.attendance * 100)}% attendance`}
             actions={[
               { label: "View Reports", href: `/gradebook/${cls.id}` },
-              { label: "Message", href: `/messages?class=${cls.id}` }
+              { label: "Message", href: `/messages?class=${cls.id}` },
             ]}
             health={cls.alerts > 1 ? "warning" : "good"}
           />
         ))}
       </motion.div>
 
-        <div className="rounded-3xl border border-dashed border-slate-200 bg-white/60 p-6">
-          <p className="text-sm font-semibold text-slate-500">Quick Actions</p>
-          <div className="mt-4 grid gap-3 md:grid-cols-3">
-            <Dialog open={addGradeOpen} onOpenChange={setAddGradeOpen}>
-              <DialogTrigger asChild>
-                <Button className="flex w-full items-center justify-between rounded-2xl border border-white/50 bg-white/80 px-4 py-3 text-left text-[var(--color-fg)] shadow-none hover:border-blue-200">
-                  <div>
-                    <p className="text-sm font-semibold">Add Grade</p>
-                    <p className="text-xs text-slate-500">Update Gradebook 2.0</p>
-                  </div>
-                  <PlusCircle className="h-5 w-5 text-slate-400" />
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-lg">
-                <DialogHeader>
-                  <DialogTitle>Log a quick grade</DialogTitle>
-                  <DialogDescription>
-                    Save time by capturing the highlight before class begins.
-                  </DialogDescription>
-                </DialogHeader>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-600" htmlFor="student">
-                      Student
-                    </label>
-                    <Input
-                      id="student"
-                      placeholder="e.g. Liam Chen"
-                      {...register("student")}
-                    />
-                    {errors.student && (
-                      <p className="text-sm text-red-500">{errors.student.message}</p>
+      <div className="rounded-3xl border border-dashed border-slate-200 bg-white/60 p-6">
+        <p className="text-sm font-semibold text-slate-500">Quick Actions</p>
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          <Dialog open={addGradeOpen} onOpenChange={setAddGradeOpen}>
+            <DialogTrigger asChild>
+              <Button className="flex w-full items-center justify-between rounded-2xl border border-white/50 bg-white/80 px-4 py-3 text-left text-[var(--color-fg)] shadow-none hover:border-blue-200">
+                <div>
+                  <p className="text-sm font-semibold">Add Grade</p>
+                  <p className="text-xs text-slate-500">Update Gradebook 2.0</p>
+                </div>
+                <PlusCircle className="h-5 w-5 text-slate-400" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-lg">
+              <DialogHeader>
+                <DialogTitle>Log a quick grade</DialogTitle>
+                <DialogDescription>
+                  Save time by capturing the highlight before class begins.
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={void handleSubmit(onSubmit)} className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-600" htmlFor="student">
+                    Student
+                  </label>
+                  <Input
+                    id="student"
+                    placeholder="e.g. Liam Chen"
+                    {...register("student")}
+                  />
+                  {errors.student && (
+                    <p className="text-sm text-red-500">{errors.student.message}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <label
+                    className="text-sm font-medium text-slate-600"
+                    htmlFor="category"
+                  >
+                    Category
+                  </label>
+                  <Controller
+                    control={control}
+                    name="category"
+                    render={({ field }) => (
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <SelectTrigger id="category">
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="assignment">Assignment</SelectItem>
+                          <SelectItem value="project">Project</SelectItem>
+                          <SelectItem value="assessment">Assessment</SelectItem>
+                        </SelectContent>
+                      </Select>
                     )}
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-600" htmlFor="category">
-                      Category
-                    </label>
-                    <Controller
-                      control={control}
-                      name="category"
-                      render={({ field }) => (
-                        <Select value={field.value} onValueChange={field.onChange}>
-                          <SelectTrigger id="category">
-                            <SelectValue placeholder="Select category" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="assignment">Assignment</SelectItem>
-                            <SelectItem value="project">Project</SelectItem>
-                            <SelectItem value="assessment">Assessment</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                    {errors.category && (
-                      <p className="text-sm text-red-500">{errors.category.message}</p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-600" htmlFor="score">
-                      Score (%)
-                    </label>
-                    <Input
-                      id="score"
-                      type="number"
-                      inputMode="numeric"
-                      placeholder="92"
-                      {...register("score")}
-                    />
-                    {errors.score && (
-                      <p className="text-sm text-red-500">{errors.score.message}</p>
-                    )}
-                  </div>
-                  <div className="flex justify-end gap-3">
-                    <Button variant="ghost" type="button" onClick={() => setAddGradeOpen(false)}>
-                      Cancel
-                    </Button>
-                    <Button type="submit">Save grade</Button>
-                  </div>
-                </form>
-              </DialogContent>
-            </Dialog>
-            {quickActions.map((action) => (
-              <Link
-                key={action.label}
+                  />
+                  {errors.category && (
+                    <p className="text-sm text-red-500">{errors.category.message}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-600" htmlFor="score">
+                    Score (%)
+                  </label>
+                  <Input
+                    id="score"
+                    type="number"
+                    inputMode="numeric"
+                    placeholder="92"
+                    {...register("score")}
+                  />
+                  {errors.score && (
+                    <p className="text-sm text-red-500">{errors.score.message}</p>
+                  )}
+                </div>
+                <div className="flex justify-end gap-3">
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    onClick={() => setAddGradeOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit">Save grade</Button>
+                </div>
+              </form>
+            </DialogContent>
+          </Dialog>
+          {quickActions.map((action) => (
+            <Link
+              key={action.label}
               href={action.href}
               className="flex items-center justify-between rounded-2xl border border-white/50 bg-white/80 px-4 py-3 text-[var(--color-fg)] transition hover:border-blue-200 hover:shadow-lg"
             >

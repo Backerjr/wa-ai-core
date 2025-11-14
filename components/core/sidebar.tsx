@@ -11,7 +11,7 @@ import {
   PieChart,
   Settings,
   Sparkles,
-  UsersRound
+  UsersRound,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -30,31 +30,31 @@ export const navItems: NavItem[] = [
   {
     label: "Teacher Home",
     href: "/dashboard/teacher",
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
   {
     label: "Manager Hub",
     href: "/dashboard/manager",
-    icon: PieChart
+    icon: PieChart,
   },
   {
     label: "Attendance",
     href: "/attendance/grade-10-math",
     activePrefix: "/attendance",
-    icon: CalendarCheck
+    icon: CalendarCheck,
   },
   {
     label: "Gradebook 2.0",
     href: "/gradebook/grade-10-math",
     activePrefix: "/gradebook",
-    icon: GraduationCap
+    icon: GraduationCap,
   },
   {
     label: "Student Portal",
     href: "/student",
-    icon: UsersRound
-  }
-] ;
+    icon: UsersRound,
+  },
+];
 
 type SidebarNavListProps = {
   collapsed?: boolean;
@@ -72,7 +72,7 @@ export function Sidebar() {
       aria-label="Primary navigation"
       className={cn(
         "glass-card sticky top-4 hidden h-[calc(100vh-2rem)] flex-col rounded-3xl border border-white/40 px-3 py-5 transition-all duration-300 md:flex",
-        sidebarCollapsed ? "w-24" : "w-72"
+        sidebarCollapsed ? "w-24" : "w-72",
       )}
     >
       <div className="flex items-center justify-between px-3 pb-6">
@@ -89,7 +89,9 @@ export function Sidebar() {
           onClick={toggleSidebar}
           className="text-slate-500"
         >
-          <ChevronLeft className={cn("h-5 w-5 transition", sidebarCollapsed && "rotate-180")} />
+          <ChevronLeft
+            className={cn("h-5 w-5 transition", sidebarCollapsed && "rotate-180")}
+          />
         </Button>
       </div>
       <SidebarNavList collapsed={sidebarCollapsed} />
@@ -114,7 +116,9 @@ export function Sidebar() {
             <Sparkles className="mr-2 h-4 w-4" />
             Launch
           </Button>
-          <p className="pt-1 text-[11px] uppercase tracking-wide text-white/80">Cmd/Ctrl + K</p>
+          <p className="pt-1 text-[11px] uppercase tracking-wide text-white/80">
+            Cmd/Ctrl + K
+          </p>
         </div>
       </div>
     </aside>
@@ -125,10 +129,7 @@ export function SidebarNavList({ collapsed, onNavigate }: SidebarNavListProps) {
   const pathname = usePathname();
 
   return (
-    <nav
-      aria-label="Primary"
-      className="flex flex-1 flex-col gap-1 overflow-y-auto px-1"
-    >
+    <nav aria-label="Primary" className="flex flex-1 flex-col gap-1 overflow-y-auto px-1">
       {navItems.map((item) => {
         const Icon = item.icon;
         const active = isActiveRoute(pathname, item);
@@ -137,15 +138,15 @@ export function SidebarNavList({ collapsed, onNavigate }: SidebarNavListProps) {
           collapsed ? "justify-center" : "justify-start",
           active
             ? "bg-blue-600/10 text-blue-700"
-            : "text-slate-600 hover:bg-white/80 hover:text-slate-900"
+            : "text-slate-600 hover:bg-white/80 hover:text-slate-900",
         );
         const iconClasses = cn(
           "h-5 w-5 transition",
-          active ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
+          active ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600",
         );
         const labelClasses = cn(
           "ml-3 text-sm font-semibold",
-          collapsed && "ml-0 sr-only"
+          collapsed && "ml-0 sr-only",
         );
         const content = (
           <>

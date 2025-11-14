@@ -10,8 +10,8 @@ const mockRows = [
     assignment: 90,
     project: 90,
     assessment: 90,
-    aiInsight: "Consistent"
-  }
+    aiInsight: "Consistent",
+  },
 ];
 
 describe("GradebookGrid", () => {
@@ -22,7 +22,7 @@ describe("GradebookGrid", () => {
         classId="s1-class"
         rows={mockRows}
         classOptions={[{ id: "s1-class", title: "Test" }]}
-      />
+      />,
     );
 
     const assignmentInput = screen.getByLabelText(/Liam assignment/i);

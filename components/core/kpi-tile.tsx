@@ -11,7 +11,13 @@ interface KpiTileProps {
   icon: LucideIcon;
 }
 
-export function KpiTile({ label, value, trendLabel, trendTone = "up", icon: Icon }: KpiTileProps) {
+export function KpiTile({
+  label,
+  value,
+  trendLabel,
+  trendTone = "up",
+  icon: Icon,
+}: KpiTileProps) {
   return (
     <Card className="flex flex-col gap-3 rounded-3xl border border-white/50 p-5">
       <div className="flex items-center gap-3">
@@ -27,7 +33,7 @@ export function KpiTile({ label, value, trendLabel, trendTone = "up", icon: Icon
             "text-sm font-medium",
             trendTone === "up" && "text-green-600",
             trendTone === "down" && "text-red-500",
-            trendTone === "neutral" && "text-slate-500"
+            trendTone === "neutral" && "text-slate-500",
           )}
         >
           {trendLabel}

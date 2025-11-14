@@ -43,13 +43,15 @@ const toastReducer = (state: ToastState, action: ToastActionType): ToastState =>
     case "ADD_TOAST":
       return {
         ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT)
+        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
       };
 
     case "UPDATE_TOAST":
       return {
         ...state,
-        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t))
+        toasts: state.toasts.map((t) =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t,
+        ),
       };
 
     case "DISMISS_TOAST":
@@ -69,21 +71,21 @@ const toastReducer = (state: ToastState, action: ToastActionType): ToastState =>
           toast.id === toastId || toastId === undefined
             ? {
                 ...toast,
-                open: false
+                open: false,
               }
-            : toast
-        )
+            : toast,
+        ),
       };
     case "REMOVE_TOAST":
       if (action.toastId === undefined) {
         return {
           ...state,
-          toasts: []
+          toasts: [],
         };
       }
       return {
         ...state,
-        toasts: state.toasts.filter((t) => t.id !== action.toastId)
+        toasts: state.toasts.filter((t) => t.id !== action.toastId),
       };
   }
 };
@@ -124,13 +126,13 @@ function useToast() {
         type: "ADD_TOAST",
         toast: {
           ...props,
-          id
-        }
+          id,
+        },
       });
 
       return id;
     },
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId })
+    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
   };
 }
 

@@ -10,7 +10,7 @@ import {
   FileText,
   Loader2,
   Plus,
-  Settings2
+  Settings2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -33,20 +33,20 @@ const aiTemplates = [
     id: "diagnostic",
     title: "Diagnostic",
     description: "Gauge prior knowledge before starting a new unit.",
-    duration: "10 questions • 15 min"
+    duration: "10 questions • 15 min",
   },
   {
     id: "practice",
     title: "Practice Set",
     description: "Daily skill-building with scaffolded hints.",
-    duration: "8 questions • 20 min"
+    duration: "8 questions • 20 min",
   },
   {
     id: "exit",
     title: "Exit Ticket",
     description: "Quick pulse-check at the end of class.",
-    duration: "5 questions • 8 min"
-  }
+    duration: "5 questions • 8 min",
+  },
 ] as const;
 
 const seedQuestions = [
@@ -54,20 +54,21 @@ const seedQuestions = [
     id: "q1",
     prompt: "Solve for x: x^2 - 6x + 8 = 0",
     answer: "x = 2 or x = 4",
-    difficulty: "Medium"
+    difficulty: "Medium",
   },
   {
     id: "q2",
     prompt: "The parabola y = (x-3)^2 - 4 has what vertex?",
     answer: "Vertex at (3, -4)",
-    difficulty: "Easy"
+    difficulty: "Easy",
   },
   {
     id: "q3",
-    prompt: "A basketball is thrown with height h(t) = -16t^2 + 40t + 6. What is the maximum height?",
+    prompt:
+      "A basketball is thrown with height h(t) = -16t^2 + 40t + 6. What is the maximum height?",
     answer: "The maximum height is 26 feet at t = 1.25 seconds.",
-    difficulty: "Challenge"
-  }
+    difficulty: "Challenge",
+  },
 ];
 
 export function QuizBuilderView() {
@@ -90,14 +91,14 @@ export function QuizBuilderView() {
           prompt: "Graph the function y = -2(x+1)^2 + 5 and identify its key features.",
           answer:
             "Axis of symmetry x = -1, vertex (-1, 5), opening downward, vertical stretch by 2, y-intercept at 3.",
-          difficulty: "Medium"
-        }
+          difficulty: "Medium",
+        },
       ]);
       setIsGenerating(false);
       timeoutRef.current = null;
       toast({
         title: "Quiz expanded",
-        description: "Added an AI-suggested question based on today's lesson focus."
+        description: "Added an AI-suggested question based on today's lesson focus.",
       });
     }, 1600);
   };
@@ -113,14 +114,14 @@ export function QuizBuilderView() {
   const handleTemplateClick = (templateTitle: string) => {
     toast({
       title: "Template applied",
-      description: `Loaded the ${templateTitle} template.`
+      description: `Loaded the ${templateTitle} template.`,
     });
   };
 
   const handleCopy = () => {
     toast({
       title: "Quiz copied",
-      description: "Link copied to your clipboard."
+      description: "Link copied to your clipboard.",
     });
   };
 
@@ -133,7 +134,9 @@ export function QuizBuilderView() {
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl font-semibold text-[var(--color-fg)]">AI Quiz Builder</h1>
+            <h1 className="text-3xl font-semibold text-[var(--color-fg)]">
+              AI Quiz Builder
+            </h1>
             <p className="text-sm text-slate-500">
               Generate, customize, and share formative checks in minutes.
             </p>
@@ -198,11 +201,18 @@ export function QuizBuilderView() {
 
             <TabsContent value="questions" className="space-y-4 pt-4">
               {questions.map((question) => (
-                <Card key={question.id} className="border-l-4 border-l-blue-500 bg-blue-50/50 p-4">
+                <Card
+                  key={question.id}
+                  className="border-l-4 border-l-blue-500 bg-blue-50/50 p-4"
+                >
                   <div className="flex items-start justify-between gap-4">
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-[var(--color-fg)]">{question.prompt}</p>
-                      <p className="text-xs text-slate-500">Suggested answer: {question.answer}</p>
+                      <p className="text-sm font-medium text-[var(--color-fg)]">
+                        {question.prompt}
+                      </p>
+                      <p className="text-xs text-slate-500">
+                        Suggested answer: {question.answer}
+                      </p>
                     </div>
                     <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-600">
                       {question.difficulty}
@@ -210,7 +220,12 @@ export function QuizBuilderView() {
                   </div>
                 </Card>
               ))}
-              <Button variant="outline" className="w-full justify-start" onClick={handleGenerate} disabled={isGenerating}>
+              <Button
+                variant="outline"
+                className="w-full justify-start"
+                onClick={handleGenerate}
+                disabled={isGenerating}
+              >
                 <Plus className="mr-2 h-4 w-4" />
                 {isGenerating ? "Adding question..." : "Ask AI for another question"}
               </Button>
@@ -233,18 +248,27 @@ export function QuizBuilderView() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="standards">Align to standards</Label>
-                  <Input id="standards" placeholder="e.g., CCSS.MATH.CONTENT.HSA.CED.A.2" />
+                  <Input
+                    id="standards"
+                    placeholder="e.g., CCSS.MATH.CONTENT.HSA.CED.A.2"
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-between rounded-2xl border border-dashed border-slate-200 bg-white p-4">
                 <div>
-                  <p className="text-sm font-semibold text-[var(--color-fg)]">Include step-by-step hints</p>
-                  <p className="text-xs text-slate-500">Students can reveal hints after their first attempt.</p>
+                  <p className="text-sm font-semibold text-[var(--color-fg)]">
+                    Include step-by-step hints
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Students can reveal hints after their first attempt.
+                  </p>
                 </div>
                 <Switch checked={includeHints} onCheckedChange={setIncludeHints} />
               </div>
               <Card className="p-4">
-                <h4 className="text-sm font-semibold text-[var(--color-fg)]">Auto feedback tone</h4>
+                <h4 className="text-sm font-semibold text-[var(--color-fg)]">
+                  Auto feedback tone
+                </h4>
                 <p className="text-xs text-slate-500">
                   Choose how the AI responds to student answers and misconceptions.
                 </p>
@@ -264,7 +288,9 @@ export function QuizBuilderView() {
                   <CalendarRange className="h-5 w-5 text-blue-600" />
                   <div>
                     <p className="text-sm font-semibold text-[var(--color-fg)]">Window</p>
-                    <p className="text-xs text-slate-500">Opens today at 3:15 PM • Closes tomorrow at 11:59 PM</p>
+                    <p className="text-xs text-slate-500">
+                      Opens today at 3:15 PM • Closes tomorrow at 11:59 PM
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -272,9 +298,12 @@ export function QuizBuilderView() {
                 <div className="flex items-start gap-3">
                   <Settings2 className="h-5 w-5 text-blue-600" />
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-[var(--color-fg)]">Release conditions</p>
+                    <p className="text-sm font-semibold text-[var(--color-fg)]">
+                      Release conditions
+                    </p>
                     <p className="text-xs text-slate-500">
-                      Shuffle question order, allow one retake, auto-submit when timer expires.
+                      Shuffle question order, allow one retake, auto-submit when timer
+                      expires.
                     </p>
                   </div>
                 </div>
@@ -282,7 +311,8 @@ export function QuizBuilderView() {
               <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50/50 p-4 text-sm text-slate-600">
                 <p className="font-semibold text-[var(--color-fg)]">Tip</p>
                 <p className="mt-1">
-                  Share instantly to Google Classroom or export as a printable PDF once you finalize the settings.
+                  Share instantly to Google Classroom or export as a printable PDF once
+                  you finalize the settings.
                 </p>
               </div>
             </TabsContent>
@@ -302,10 +332,14 @@ export function QuizBuilderView() {
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-semibold text-[var(--color-fg)]">{template.title}</p>
+                      <p className="text-sm font-semibold text-[var(--color-fg)]">
+                        {template.title}
+                      </p>
                       <p className="text-xs text-slate-500">{template.description}</p>
                     </div>
-                    <span className="text-xs font-medium text-slate-400">{template.duration}</span>
+                    <span className="text-xs font-medium text-slate-400">
+                      {template.duration}
+                    </span>
                   </div>
                 </button>
               ))}
@@ -313,7 +347,9 @@ export function QuizBuilderView() {
           </Card>
 
           <Card className="space-y-4 p-6">
-            <h3 className="text-sm font-semibold text-[var(--color-fg)]">Smart alignment</h3>
+            <h3 className="text-sm font-semibold text-[var(--color-fg)]">
+              Smart alignment
+            </h3>
             <div className="space-y-3 text-xs text-slate-500">
               <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-3">
                 <p className="font-medium text-[var(--color-fg)]">Lesson focus</p>
@@ -321,12 +357,18 @@ export function QuizBuilderView() {
               </div>
               <div className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-3">
                 <p className="font-medium text-[var(--color-fg)]">Student signals</p>
-                <p>27 students mastered factoring, 6 flagged for support with interpreting graphs.</p>
+                <p>
+                  27 students mastered factoring, 6 flagged for support with interpreting
+                  graphs.
+                </p>
               </div>
               <div className="rounded-2xl border border-purple-100 bg-purple-50/60 p-3">
-                <p className="font-medium text-[var(--color-fg)]">Recommended adjustments</p>
+                <p className="font-medium text-[var(--color-fg)]">
+                  Recommended adjustments
+                </p>
                 <p>
-                  Add an optional challenge problem on modeling projectile motion and enable hints for question 3.
+                  Add an optional challenge problem on modeling projectile motion and
+                  enable hints for question 3.
                 </p>
               </div>
             </div>

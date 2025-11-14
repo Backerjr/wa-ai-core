@@ -28,8 +28,7 @@ export const useUIStore = create<UIState>((set) => ({
   commandCenterOpen: false,
   activeClassId: "grade-10-math",
   commandHistory: [],
-  toggleSidebar: () =>
-    set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
+  toggleSidebar: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
   openCommandCenter: () => set({ commandCenterOpen: true }),
   closeCommandCenter: () => set({ commandCenterOpen: false }),
   setActiveClass: (id) => set({ activeClassId: id }),
@@ -38,9 +37,9 @@ export const useUIStore = create<UIState>((set) => ({
       commandHistory: [
         {
           id: createId(),
-          ...payload
+          ...payload,
         },
-        ...state.commandHistory
-      ]
-    }))
+        ...state.commandHistory,
+      ],
+    })),
 }));

@@ -7,18 +7,17 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-blue-100 text-blue-700",
+        default: "border-transparent bg-blue-100 text-blue-700",
         success: "border-transparent bg-green-100 text-green-700",
         warning: "border-transparent bg-amber-100 text-amber-700",
         outline: "border-slate-300 text-slate-600",
-        ghost: "border-transparent text-slate-500"
-      }
+        ghost: "border-transparent text-slate-500",
+      },
     },
     defaultVariants: {
-      variant: "default"
-    }
-  }
+      variant: "default",
+    },
+  },
 );
 
 export interface BadgeProps

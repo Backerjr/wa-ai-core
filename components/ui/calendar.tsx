@@ -25,12 +25,12 @@ function Calendar({ className, showOutsideDays = true, ...props }: CalendarProps
         cell: "relative h-10 w-10 text-center text-sm focus-within:relative focus-within:z-20",
         day: cn(
           "h-10 w-10 rounded-full p-0 font-medium text-slate-600 transition",
-          "hover:bg-blue-50"
+          "hover:bg-blue-50",
         ),
         day_selected: "bg-blue-500 text-white hover:bg-blue-500",
         day_today: "text-blue-600",
         day_disabled: "text-slate-300",
-        day_outside: "text-slate-300"
+        day_outside: "text-slate-300",
       }}
       {...props}
     />
