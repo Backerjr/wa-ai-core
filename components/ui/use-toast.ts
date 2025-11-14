@@ -54,7 +54,7 @@ const toastReducer = (state: ToastState, action: ToastActionType): ToastState =>
         ),
       };
 
-    case "DISMISS_TOAST":
+    case "DISMISS_TOAST": {
       const toastId = action.toastId;
 
       if (toastId) {
@@ -76,6 +76,7 @@ const toastReducer = (state: ToastState, action: ToastActionType): ToastState =>
             : toast,
         ),
       };
+    }
     case "REMOVE_TOAST":
       if (action.toastId === undefined) {
         return {
