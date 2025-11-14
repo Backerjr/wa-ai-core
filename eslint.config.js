@@ -72,27 +72,27 @@ export default tseslint.config(
       // Custom rules or overrides
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "@typescript-eslint/explicit-module-boundary-types": "off", // Adjust as needed
-      // Add any other rules you want to enforce or override
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/ban-types": "warn",
-      "@typescript-eslint/ban-ts-comment": "warn",
-      "no-case-declarations": "warn",
-      "no-constant-binary-expression": "warn",
-      "no-empty": "warn",
-      "no-fallthrough": "warn",
-      "no-func-assign": "warn",
-      "no-prototype-builtins": "warn",
-      "no-redeclare": "warn",
-      "no-sparse-arrays": "warn",
-      "@typescript-eslint/no-this-alias": "warn",
-      "no-unsafe-optional-chaining": "warn",
+      // Re-enabled rules to improve code quality
+      "@typescript-eslint/no-explicit-any": "warn", // Keep as warn for gradual adoption
+      "@typescript-eslint/ban-types": "error",
+      "@typescript-eslint/ban-ts-comment": "warn", // Keep as warn for legitimate use cases
+      "no-case-declarations": "error",
+      "no-constant-binary-expression": "error",
+      "no-empty": "warn", // Keep as warn for legitimate empty blocks
+      "no-fallthrough": "error",
+      "no-func-assign": "error",
+      "no-prototype-builtins": "error",
+      "no-redeclare": "error",
+      "no-sparse-arrays": "error",
+      "@typescript-eslint/no-this-alias": "error",
+      "no-unsafe-optional-chaining": "error",
       "no-unused-private-class-members": "warn",
-      "no-useless-escape": "warn",
-      "@typescript-eslint/no-var-requires": "warn",
-      "getter-return": "warn",
-      "no-control-regex": "warn",
-      "valid-typeof": "warn",
-      "no-misleading-character-class": "warn",
+      "no-useless-escape": "error",
+      "@typescript-eslint/no-var-requires": "error",
+      "getter-return": "error",
+      "no-control-regex": "error",
+      "valid-typeof": "error",
+      "no-misleading-character-class": "error",
     },
     settings: {
       react: {
