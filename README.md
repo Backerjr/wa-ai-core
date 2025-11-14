@@ -7,3 +7,4 @@ Enterprise-grade AI education platform built with Next.js 15, React 19, TypeScri
 ```bash
 pnpm install
 pnpm dev
+```

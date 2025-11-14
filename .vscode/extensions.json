@@ -1,6 +1,3 @@
 {
-    "recommendations": [
-        "google.gemini-cli-vscode-ide-companion",
-        "google.geminicodeassist"
-    ]
+  "recommendations": ["google.gemini-cli-vscode-ide-companion", "google.geminicodeassist"]
 }

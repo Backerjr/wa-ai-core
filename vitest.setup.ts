@@ -8,7 +8,8 @@ export default defineConfig(async () => {
   const plugins = Array.isArray(pluginResult) ? pluginResult : [pluginResult];
 
   return {
-    plugins,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    plugins: plugins as any,
     test: {
       globals: true,
       environment: "jsdom",

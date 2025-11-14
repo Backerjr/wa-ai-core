@@ -5,9 +5,11 @@ This guide will help you configure the Rozmowa AI Core application with your own
 ## Quick Start
 
 1. **Copy the configuration template**:
+
    ```bash
    cp firebase-config.template.js firebase-config.js
    ```
+
    > `firebase-config.js` is ignored by git, so your credentials stay on your machine.
 
 2. **Get your Firebase configuration**:
@@ -20,15 +22,15 @@ This guide will help you configure the Rozmowa AI Core application with your own
 
 3. **Update the configuration file**:
    Open `firebase-config.js` and replace the placeholder values:
-   
+
    ```javascript
    export const firebaseConfig = {
-       apiKey: "your-actual-api-key",              // Replace this
-       authDomain: "your-project.firebaseapp.com", // Replace this
-       projectId: "your-project-id",                // Replace this
-       storageBucket: "your-project.appspot.com",   // Replace this
-       messagingSenderId: "your-sender-id",         // Replace this
-       appId: "your-app-id"                         // Replace this
+     apiKey: "your-actual-api-key", // Replace this
+     authDomain: "your-project.firebaseapp.com", // Replace this
+     projectId: "your-project-id", // Replace this
+     storageBucket: "your-project.appspot.com", // Replace this
+     messagingSenderId: "your-sender-id", // Replace this
+     appId: "your-app-id", // Replace this
    };
    ```
 
@@ -83,7 +85,7 @@ const firebaseConfig = {
   projectId: "my-project",
   storageBucket: "my-project.appspot.com",
   messagingSenderId: "123456789",
-  appId: "1:123456789:web:abc123..."
+  appId: "1:123456789:web:abc123...",
 };
 ```
 
@@ -149,7 +151,8 @@ The security rules in `firestore.rules` ensure that each user can only access th
 
 **Cause**: Firestore database is not created or security rules are blocking access.
 
-**Solution**: 
+**Solution**:
+
 1. Verify Firestore database exists in Firebase Console
 2. Deploy the security rules using `firebase deploy --only firestore:rules`
 3. Temporarily set Firestore to test mode to verify the issue is with security rules
@@ -159,6 +162,7 @@ The security rules in `firestore.rules` ensure that each user can only access th
 **Cause**: Security rules are blocking access or not deployed correctly.
 
 **Solution**: Deploy the security rules from `firestore.rules`:
+
 ```bash
 firebase deploy --only firestore:rules
 ```
@@ -205,6 +209,7 @@ If you encounter issues not covered in this guide:
 ---
 
 **Note**: This application uses Firebase's free tier, which includes:
+
 - 50,000 document reads/day
 - 20,000 document writes/day
 - 20,000 document deletes/day

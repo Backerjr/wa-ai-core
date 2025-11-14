@@ -13,7 +13,7 @@ export const firebaseConfig = {
   projectId: "studio-617595928-cae03",
   storageBucket: "studio-617595928-cae03.firebasestorage.app",
   messagingSenderId: "201908464871",
-  appId: "1:201908464871:web:e815d2a1cc1284225e4642"
+  appId: "1:201908464871:web:e815d2a1cc1284225e4642",
 };
 
 /**

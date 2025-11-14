@@ -9,6 +9,7 @@ These mockups visualize the AI-powered education ecosystem for **teachers**, **m
 ## 1. Teacher Dashboard (AI-Powered Home)
 
 ### Desktop View
+
 ```
 +-------------------------------------------------------------------------------------+
 | School Logo             AI Dashboard                                                |
@@ -30,6 +31,7 @@ These mockups visualize the AI-powered education ecosystem for **teachers**, **m
 ```
 
 ### Tablet View
+
 ```
 +------------------------------------------------------------+
 | ☰ | Good Morning, Wiktoria 🌤️                             |
@@ -44,6 +46,7 @@ These mockups visualize the AI-powered education ecosystem for **teachers**, **m
 ```
 
 ### Mobile View
+
 ```
 ───────────────────────────────
 👋 Good Morning, Wiktoria
@@ -62,6 +65,7 @@ Quick: [Add Grade] [Quiz]
 ```
 
 **Smart Responsiveness:**
+
 - Sidebar collapses to icon bar or hamburger menu.
 - Cards stack vertically with auto-prioritization.
 - Floating action button (FAB) appears for core actions (e.g., “+ Attendance”).
@@ -71,6 +75,7 @@ Quick: [Add Grade] [Quiz]
 ## 2. Manager Dashboard (AI Analytics Hub)
 
 ### Desktop View
+
 ```
 +-------------------------------------------------------------------------------------+
 | [Sidebar]              | KPI Snapshot 📊                                           |
@@ -89,6 +94,7 @@ Quick: [Add Grade] [Quiz]
 ```
 
 ### Mobile View
+
 ```
 ───────────────────────────────
 📊 Manager Dashboard
@@ -106,6 +112,7 @@ Top Classes:
 ```
 
 **Adaptive Enhancements:**
+
 - KPI cards switch to horizontal scroll.
 - Graphs become stacked mini-charts for quick scanning.
 - Alerts condensed into icon notifications.
@@ -115,6 +122,7 @@ Top Classes:
 ## 3. Student Portal (AI Learning Companion)
 
 ### Desktop View
+
 ```
 +-------------------------------------------------------------------------------------+
 | [Sidebar]              | Welcome Back, Emily 👋                                     |
@@ -129,6 +137,7 @@ Top Classes:
 ```
 
 ### Mobile View
+
 ```
 ───────────────────────────────
 👋 Hi Emily
@@ -144,6 +153,7 @@ Math 82% | English 90% | Science 85%
 ```
 
 **Adaptive Enhancements:**
+
 - Circular progress rings resize fluidly.
 - Achievements switch to scrollable badges.
 - “Start Study” FAB for immediate engagement.
@@ -153,6 +163,7 @@ Math 82% | English 90% | Science 85%
 ## 4. Unified AI Command Center (Overlay)
 
 ### Universal Responsive Layout
+
 ```
 ───────────────────────────────
 🔍 AI Command Center
@@ -166,6 +177,7 @@ Output appears as floating card with export options.
 ```
 
 **Responsive Enhancements:**
+
 - Mobile: Full-screen modal overlay with swipe-to-close.
 - Desktop: Right-corner floating window with keyboard shortcuts.
 - Tablet: Split-screen chat-style layout.
@@ -173,6 +185,7 @@ Output appears as floating card with export options.
 ---
 
 ## 5. Responsive Design Principles
+
 - **Auto-Priority Layouts:** Key actions remain accessible regardless of screen size.
 - **Touch-Friendly Controls:** Larger hit areas and smooth haptics for mobile.
 - **Consistency in Color & Typography:** Unified visual identity across devices.
@@ -186,6 +199,7 @@ Primary: Inter | Accent: Playfair Display | Optional: Outfit (student UI)
 ---
 
 ### Design Ethos
+
 > **AI Everywhere. Calm Design Anywhere.**
 
 From desktop to mobile, this platform maintains clarity and elegance — ensuring the experience feels equally powerful in every context.
@@ -196,7 +210,7 @@ From desktop to mobile, this platform maintains clarity and elegance — ensurin
 
 # 🔧 High‑Tech Build Prompt for GitHub Copilot (Copy–Paste)
 
-> Use this *single prompt* in Copilot Chat inside your repo (or an empty folder). It’s designed to minimize ambiguity, enforce quality gates, and generate a working, modern, AI‑ready education platform UI with zero fluff. **Copilot: follow every instruction precisely.**
+> Use this _single prompt_ in Copilot Chat inside your repo (or an empty folder). It’s designed to minimize ambiguity, enforce quality gates, and generate a working, modern, AI‑ready education platform UI with zero fluff. **Copilot: follow every instruction precisely.**
 
 ```
 SYSTEM INSTRUCTIONS FOR COPILOT — DO NOT IGNORE
@@ -331,4 +345,3 @@ Print all created/updated files using the exact OUTPUT FORMAT. Do not include ex
 ```
 
 **How to use:** Open Copilot Chat in VS Code → paste the block above → run. Then execute the printed file set in your repo. If Copilot chunks the response, paste the prompt again with “continue from last file name shown.”
-
