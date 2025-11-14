@@ -32,7 +32,6 @@ export function StudentSpotlight() {
                       width={64}
                       height={64}
                       className="rounded-full"
-                      unoptimized={true}
                     />
                     <div>
                       <h4 className="font-semibold">{spotlight.studentName}</h4>
