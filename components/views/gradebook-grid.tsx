@@ -142,6 +142,8 @@ export function GradebookGrid({
                   <td key={key} className="px-6 py-4">
                     <input
                       type="number"
+                      id={`${row.id}-${key}`}
+                      name={`${row.id}-${key}`}
                       value={row[key]}
                       min={0}
                       max={100}

@@ -81,6 +81,7 @@ export function Topbar() {
             placeholder="Search classes, students, or run /commands"
             className="pl-11"
             aria-label="Search classes, students, or commands"
+            name="search"
           />
         </div>
         <div className="flex flex-wrap gap-2">

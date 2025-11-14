@@ -188,6 +188,7 @@ export function MessagesView() {
                     className="pl-9"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    name="search-messages"
                   />
                 </div>
                 <div className="flex gap-2">
